@@ -1,0 +1,27 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoredPackages">
+        <list>
+          <option value="python-dotenv" />
+          <option value="langchain-core" />
+          <option value="langchain-google-genai" />
+          <option value="langchain" />
+          <option value="pydantic" />
+          <option value="todoist-api-python" />
+          <option value="tzdata" />
+          <option value="jupyter" />
+          <option value="lxml" />
+          <option value="matplotlib" />
+          <option value="pandas" />
+          <option value="Pillow" />
+          <option value="scikit-learn" />
+          <option value="numpy" />
+          <option value="seaborn" />
+          <option value="tensorflow" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
