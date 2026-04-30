@@ -59,19 +59,6 @@ def layout_hide_show(button_id, context):
             add_button.config(text='GO BACK')
             add_job_button.grid(column=2, row=2, padx=2, pady=2)
 
-            # if job_name_entry.get() != '' and job_type_entry.get() != '' and transport_entry.get() != '' and job_address_entry.get() != '' and date_entry.get() != '' and job_status_entry.get() != '':
-            #     new_job_data = {
-            #     'job_name': job_name_entry.get(),
-            #     'job_type': job_type_entry.get(),
-            #     'transport': transport_entry.get(),
-            #     'job_address': job_address_entry.get(),
-            #     'date_applied': date_entry.get(),
-            #     'job_status': job_status_entry.get(),
-            # }
-            #     add_job_button.config(command=lambda: data_manager.save_new_job(new_job_data, add_job_button))
-
-
-
             view_all_button.grid_remove()
             search_button.grid_remove()
             return None
