@@ -55,6 +55,7 @@ search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show(
     'search_button': search_button,
     'find_button': find_button,
     'search_by_options': search_by_options,
+    'opt': opt,
 }))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
@@ -135,14 +136,9 @@ search_bar = ttk.Entry(frm, width=25)
 search_bar.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
 search_bar.grid_remove()
 
-# Dropdown options
-days = ["job name", "date", "status", "type", "bus/tram stop"]
-
-# Selected option variable
-opt = StringVar(value="job name")
-
-# Dropdown menu
-search_by_options = OptionMenu(frm, opt, *days)
+search_by = ["job name", "date", "status", "type", "bus/tram stop"]
+opt = StringVar(value="SEARCH BY")
+search_by_options = OptionMenu(frm, opt, *search_by)
 search_by_options.grid(column=1, row=3, padx=2, pady=2)
 search_by_options.grid_remove()
 

@@ -99,6 +99,7 @@ def layout_hide_show(button_id, context):
         search_button = context['search_button']
         find_button = context['find_button']
         search_by_options = context['search_by_options']
+        opt = context['opt']
         if not search_bar.winfo_viewable():
             search_bar.grid(column=0, row=3, padx=2, pady=2)
             search_by_options.grid(column=2, row=3, padx=2, pady=2)
@@ -111,6 +112,7 @@ def layout_hide_show(button_id, context):
         else:
             search_button.config(text='SEARCH')
             search_button.grid(column=2, row=2, padx=2, pady=2)
+            opt.set("SEARCH BY")
             search_by_options.grid_remove()
             find_button.grid_remove()
             search_bar.grid_remove()
