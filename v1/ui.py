@@ -15,12 +15,38 @@ frm = ttk.Frame(root, padding=10)
 frm.grid()
 
 
-
-view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all', {'data': data, 'tree': tree, 'view_all_button': view_all_button, 'add_button': add_button, 'edit_button': edit_button}))
+view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all', {
+    'data': data,
+    'tree': tree,
+    'view_all_button': view_all_button,
+    'add_button': add_button,
+    'edit_button': edit_button
+}))
 view_all_button.grid(column=0, row=2, padx=2, pady=2)
 
-add_button = ttk.Button(frm, text="ADD")
+add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_button', {
+    'job_name_label': job_name_label,
+    'job_name_entry': job_name_entry,
+    'job_type_label': job_type_label,
+    'job_type_entry': job_type_entry,
+    'transport_label': transport_label,
+    'transport_entry': transport_entry,
+    'job_address_label': job_address_label,
+    'job_address_entry': job_address_entry,
+    'date_label': date_label,
+    'date_entry': date_entry,
+    'job_status_label': job_status_label,
+    'job_status_entry' : job_status_entry,
+    'view_all_button': view_all_button,
+    'search_button': search_button,
+    'add_button': add_button,
+    'add_job_button': add_job_button
+}))
 add_button.grid(column=1, row=2, padx=2, pady=2)
+
+add_job_button = ttk.Button(frm, text='ADD NEW JOB INFO')
+add_job_button.grid(column=2, row=2, padx=2, pady=2)
+add_job_button.grid_remove()
 
 search_button = ttk.Button(frm, text="SEARCH")
 search_button.grid(column=2, row=2, padx=2, pady=2)
@@ -29,6 +55,8 @@ edit_button = ttk.Button(frm, text="EDIT")
 edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()
 
+
+# DISPLAY ALL JOBS
 tree = ttk.Treeview(frm, columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied',
                                           'job_status'], show='headings')
 tree.heading('job_name', text='Job Name')
@@ -46,6 +74,49 @@ tree.column('job_status', width=150)
 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
 tree.grid_remove()
 
+
+# ADD LAYOUT ELEMENTS
+job_name_label = ttk.Label(frm, text="Job Name:", anchor='e')
+job_name_label.grid(column=0, row=3, padx=2, pady=2)
+job_name_label.grid_remove()
+job_name_entry = ttk.Entry(frm, width=50)
+job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
+job_name_entry.grid_remove()
+
+job_type_label = ttk.Label(frm, text="Job Type:", anchor='e')
+job_type_label.grid(column=0, row=4, padx=2, pady=2)
+job_type_label.grid_remove()
+job_type_entry = ttk.Entry(frm, width=50)
+job_type_entry.grid(column=1, row=4, padx=2, pady=2, columnspan=2)
+job_type_entry.grid_remove()
+
+transport_label = ttk.Label(frm, text="Tram/Bus stop:", anchor='e')
+transport_label.grid(column=0, row=5, padx=2, pady=2)
+transport_label.grid_remove()
+transport_entry = ttk.Entry(frm, width=50)
+transport_entry.grid(column=1, row=5, padx=2, pady=2, columnspan=2)
+transport_entry.grid_remove()
+
+job_address_label = ttk.Label(frm, text="Job Address:", anchor='e')
+job_address_label.grid(column=0, row=6, padx=2, pady=2)
+job_address_label.grid_remove()
+job_address_entry = ttk.Entry(frm, width=50)
+job_address_entry.grid(column=1, row=6, padx=2, pady=2, columnspan=2)
+job_address_entry.grid_remove()
+
+date_label = ttk.Label(frm, text="Date (DD-MM-YYYY):", anchor='e')
+date_label.grid(column=0, row=7, padx=2, pady=2)
+date_label.grid_remove()
+date_entry = ttk.Entry(frm, width=50)
+date_entry.grid(column=1, row=7, padx=2, pady=2, columnspan=2)
+date_entry.grid_remove()
+
+job_status_label = ttk.Label(frm, text="Job Status:", anchor='e')
+job_status_label.grid(column=0, row=8, padx=2, pady=2)
+job_status_label.grid_remove()
+job_status_entry = ttk.Entry(frm, width=50)
+job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
+job_status_entry.grid_remove()
 
 root.mainloop()
 
