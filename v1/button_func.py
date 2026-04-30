@@ -6,8 +6,9 @@ def layout_hide_show(button_id, context):
         add_button = context['add_button']
         view_all_button = context['view_all_button']
         tree = context['tree']
-        data = context['data']
         edit_button = context['edit_button']
+        data_manager = context['data_manager']
+        data = data_manager.load_data()
         if not tree.winfo_viewable():
             if data.empty:
                 return 'No job data added yet'
