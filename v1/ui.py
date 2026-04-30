@@ -17,7 +17,7 @@ frm.grid()
 menu_label = ttk.Label(frm, text="CHOOSE YOUR OPTION")
 menu_label.grid(column=1, row=1, padx=10, pady=10)
 
-view_all_button = ttk.Button(frm, text="VIEW ALL")
+view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: show_all(data,tree))
 view_all_button.grid(column=0, row=2, padx=2, pady=2)
 
 add_button = ttk.Button(frm, text="ADD")
@@ -40,9 +40,8 @@ tree.column('job_address', width=100)
 tree.heading('date_applied', text='Date Applied')
 tree.column('date_applied', width=100)
 tree.heading('job_status', text='Job Status')
-tree.column('job_status', width=100)
+tree.column('job_status', width=150)
 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
-
 
 
 root.mainloop()
