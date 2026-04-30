@@ -9,15 +9,14 @@ data = data_manager.data
 
 
 root = Tk()
-root.minsize(300,100)
+root.minsize(250,70)
 root.title("JOB HUNT HELPER")
 frm = ttk.Frame(root, padding=10)
 frm.grid()
 
-menu_label = ttk.Label(frm, text="CHOOSE YOUR OPTION")
-menu_label.grid(column=1, row=1, padx=10, pady=10)
 
-view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all', {'data': data, 'tree': tree, 'view_all_button': view_all_button}))
+
+view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all', {'data': data, 'tree': tree, 'view_all_button': view_all_button, 'add_button': add_button, 'edit_button': edit_button}))
 view_all_button.grid(column=0, row=2, padx=2, pady=2)
 
 add_button = ttk.Button(frm, text="ADD")
@@ -26,6 +25,9 @@ add_button.grid(column=1, row=2, padx=2, pady=2)
 search_button = ttk.Button(frm, text="SEARCH")
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
+edit_button = ttk.Button(frm, text="EDIT")
+edit_button.grid(column=1, row=2, padx=2, pady=2)
+edit_button.grid_remove()
 
 tree = ttk.Treeview(frm, columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied',
                                           'job_status'], show='headings')
