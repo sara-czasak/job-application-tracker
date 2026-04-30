@@ -40,20 +40,31 @@ add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_b
     'view_all_button': view_all_button,
     'search_button': search_button,
     'add_button': add_button,
-    'add_job_button': add_job_button
+    'add_job_button': add_job_button,
 }))
 add_button.grid(column=1, row=2, padx=2, pady=2)
 
-add_job_button = ttk.Button(frm, text='ADD NEW JOB INFO')
+add_job_button = ttk.Button(frm, text='SAVE')
 add_job_button.grid(column=2, row=2, padx=2, pady=2)
 add_job_button.grid_remove()
 
-search_button = ttk.Button(frm, text="SEARCH")
+search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show('search_button', {
+    'view_all_button': view_all_button,
+    'add_button': add_button,
+    'search_bar': search_bar,
+    'search_button': search_button,
+    'find_button': find_button,
+    'search_by_options': search_by_options,
+}))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
 edit_button = ttk.Button(frm, text="EDIT")
 edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()
+
+find_button = ttk.Button(frm, text="FIND")
+find_button.grid(column=2, row=2, padx=2, pady=2)
+find_button.grid_remove()
 
 
 # DISPLAY ALL JOBS
@@ -118,5 +129,22 @@ job_status_entry = ttk.Entry(frm, width=50)
 job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
 job_status_entry.grid_remove()
 
-root.mainloop()
 
+# SEARCH UI
+search_bar = ttk.Entry(frm, width=25)
+search_bar.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
+search_bar.grid_remove()
+
+# Dropdown options
+days = ["job name", "date", "status", "type", "bus/tram stop"]
+
+# Selected option variable
+opt = StringVar(value="job name")
+
+# Dropdown menu
+search_by_options = OptionMenu(frm, opt, *days)
+search_by_options.grid(column=1, row=3, padx=2, pady=2)
+search_by_options.grid_remove()
+
+
+root.mainloop()

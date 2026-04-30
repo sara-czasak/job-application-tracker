@@ -58,6 +58,20 @@ def layout_hide_show(button_id, context):
             job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
             add_button.config(text='GO BACK')
             add_job_button.grid(column=2, row=2, padx=2, pady=2)
+
+            # if job_name_entry.get() != '' and job_type_entry.get() != '' and transport_entry.get() != '' and job_address_entry.get() != '' and date_entry.get() != '' and job_status_entry.get() != '':
+            #     new_job_data = {
+            #     'job_name': job_name_entry.get(),
+            #     'job_type': job_type_entry.get(),
+            #     'transport': transport_entry.get(),
+            #     'job_address': job_address_entry.get(),
+            #     'date_applied': date_entry.get(),
+            #     'job_status': job_status_entry.get(),
+            # }
+            #     add_job_button.config(command=lambda: data_manager.save_new_job(new_job_data, add_job_button))
+
+
+
             view_all_button.grid_remove()
             search_button.grid_remove()
             return None
@@ -74,10 +88,35 @@ def layout_hide_show(button_id, context):
             date_entry.grid_remove()
             job_status_label.grid_remove()
             job_status_entry.grid_remove()
-            add_job_button.grid_remove()
             search_button.grid(column=2, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
-            add_button.config(text='ADD BUTTON')
+            add_button.config(text='ADD')
+            return None
+    elif button_id == 'search_button':
+        add_button = context['add_button']
+        view_all_button = context['view_all_button']
+        search_bar = context['search_bar']
+        search_button = context['search_button']
+        find_button = context['find_button']
+        search_by_options = context['search_by_options']
+        if not search_bar.winfo_viewable():
+            search_bar.grid(column=0, row=3, padx=2, pady=2)
+            search_by_options.grid(column=2, row=3, padx=2, pady=2)
+            search_button.config(text='GO BACK')
+            search_button.grid(column=1, row=2, padx=2, pady=2)
+            find_button.grid(column=2, row=2, padx=2, pady=2)
+            add_button.grid_remove()
+            view_all_button.grid_remove()
+            return None
+        else:
+            search_button.config(text='SEARCH')
+            search_button.grid(column=2, row=2, padx=2, pady=2)
+            search_by_options.grid_remove()
+            find_button.grid_remove()
+            search_bar.grid_remove()
+            add_button.grid(column=1, row=2, padx=2, pady=2)
+            view_all_button.grid(column=0, row=2, padx=2, pady=2)
             return None
     else:
         return None
+

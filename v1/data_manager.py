@@ -13,3 +13,4 @@ class DataManager:
             df = pd.DataFrame(columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied', 'job_status'])
             return df
 
+
