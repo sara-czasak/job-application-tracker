@@ -121,6 +121,7 @@ def layout_hide_show(button_id, context):
             opt.set("SEARCH BY")
             search_by_options.grid_remove()
             find_button.grid_remove()
+            search_bar.delete(0, tk.END)
             search_bar.grid_remove()
             add_button.grid(column=1, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
