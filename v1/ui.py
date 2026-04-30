@@ -7,15 +7,12 @@ from button_func import *
 data_manager = DataManager()
 data = data_manager.data
 
-# Remove later, leave for testing
-print(show_all_jobs(data))
 
 root = Tk()
 root.minsize(300,100)
+root.title("JOB HUNT HELPER")
 frm = ttk.Frame(root, padding=10)
 frm.grid()
-title = ttk.Label(frm, text="JOB HUNT HELPER")
-title.grid(column=1, row=0)
 
 menu_label = ttk.Label(frm, text="CHOOSE YOUR OPTION")
 menu_label.grid(column=1, row=1, padx=10, pady=10)
