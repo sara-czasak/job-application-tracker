@@ -96,6 +96,7 @@ edit_button = ttk.Button(frm, text="EDIT", command=lambda: layout_hide_show('edi
     'add_button': add_button,
     'update_button': update_button,
     'data_manager': data_manager,
+    'delete_button': delete_button,
 }))
 edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()

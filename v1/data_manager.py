@@ -39,7 +39,7 @@ class DataManager:
     def update_job(self, job_to_edit, index):
         global is_updated
         if self.check_if_data(job_to_edit):
-            if not index:
+            if index is None:
                 print('Nothing to update')
                 return False
             else:
@@ -77,7 +77,9 @@ class DataManager:
 
 
     def delete_row(self, index):
-        print(index)
+        if index is None:
+            print('Nothing to delete')
+            return None
         self.data = self.data.drop(index)
         self.data.to_csv('job_data.csv', index=False)
         return self.data
