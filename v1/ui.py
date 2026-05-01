@@ -42,6 +42,7 @@ add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_b
     'search_button': search_button,
     'add_button': add_button,
     'add_job_button': add_job_button,
+    'back_to_menu_button': back_to_menu_button,
 }))
 add_button.grid(column=1, row=2, padx=2, pady=2)
 
@@ -68,6 +69,8 @@ search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show(
     'data_manager': data_manager,
     'tree': tree,
     'edit_button': edit_button,
+    'frm': frm,
+    'back_to_menu_button': back_to_menu_button,
 }))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
@@ -106,6 +109,10 @@ update_button = ttk.Button(frm, text="SAVE CHANGES")
 update_button.grid(column=2, row=2, padx=2, pady=2)
 update_button.grid_remove()
 
+
+back_to_menu_button = ttk.Button(frm, text="MENU", command=lambda: back_to_menu(frm, view_all_button, add_button, search_button))
+back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
+back_to_menu_button.grid_remove()
 
 # DISPLAY ALL JOBS
 tree = ttk.Treeview(frm, columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied',

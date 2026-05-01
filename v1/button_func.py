@@ -1,6 +1,14 @@
 import tkinter as tk
 
 
+def back_to_menu(frm, view_all_button, add_button, search_button):
+    children = frm.winfo_children()
+    for i in children:
+        i.grid_remove()
+    view_all_button.grid(column=0, row=2, padx=2, pady=2)
+    add_button.grid(column=1, row=2, padx=2, pady=2)
+    search_button.grid(column=2, row=2, padx=2, pady=2)
+
 def clear_layout(items):
     for i in items:
         i.grid_remove()
@@ -76,6 +84,8 @@ def convert_and_search(context):
     view_all_button = context['view_all_button']
     edit_button = context['edit_button']
     add_button = context['add_button']
+    frm = context['frm']
+    back_to_menu_button = context['menu_button']
 
     if opt.get() == "job name":
         opt = 'job_name'
@@ -105,14 +115,9 @@ def convert_and_search(context):
                 for row in rows:
                     tree.insert('', tk.END, values=list(row[1].values))
                 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
-                # search_button.config(text='GO BACK')
-                # search_button.grid(column=2, row=2, padx=2, pady=2)
+                back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
                 return None
-        # else:
-        #     clear_layout([edit_button, tree, search_button])
-        #     search_button.grid(column=2, row=2, padx=2, pady=2)
-        #     view_all_button.config(text='VIEW ALL')
-        #     add_button.grid(column=1, row=2, padx=2, pady=2)
+
 
         return None
 
@@ -166,8 +171,9 @@ def layout_hide_show(button_id,context):
         view_all_button = context['view_all_button']
         search_button = context['search_button']
         add_job_button = context['add_job_button']
+        back_to_menu_button = context['back_to_menu_button']
         if not job_name_label.winfo_viewable():
-            clear_layout([view_all_button, search_button])
+            clear_layout([view_all_button, search_button, add_button])
             job_name_label.grid(column=0, row=3, padx=2, pady=2)
             job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
             job_type_label.grid(column=0, row=4, padx=2, pady=2)
@@ -180,7 +186,7 @@ def layout_hide_show(button_id,context):
             date_entry.grid(column=1, row=7, padx=2, pady=2, columnspan=2)
             job_status_label.grid(column=0, row=8, padx=2, pady=2)
             job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
-            add_button.config(text='GO BACK')
+            back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
             add_job_button.grid(column=2, row=2, padx=2, pady=2)
             return None
         else:
@@ -207,6 +213,7 @@ def layout_hide_show(button_id,context):
             search_button.grid(column=2, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
             add_button.config(text='ADD')
+            add_button.grid(column=1, row=2, padx=2, pady=2)
             return None
 
     # SEARCH BUTTON
@@ -220,13 +227,14 @@ def layout_hide_show(button_id,context):
         data_manager = context['data_manager']
         opt = context['opt']
         tree = context['tree']
+        frm = context['frm']
+        back_to_menu_button = context['back_to_menu_button']
 
         if not search_bar.winfo_viewable():
             clear_layout([view_all_button, add_button])
             search_bar.grid(column=0, row=3, padx=2, pady=2)
             search_by_options.grid(column=2, row=3, padx=2, pady=2)
-            search_button.config(text='GO BACK')
-            search_button.grid(column=1, row=2, padx=2, pady=2)
+            back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
             find_button.grid(column=2, row=2, padx=2, pady=2)
 
             find_button.config(command=lambda: convert_and_search({
@@ -240,6 +248,8 @@ def layout_hide_show(button_id,context):
                     'view_all_button': view_all_button,
                     'edit_button': add_button,
                     'add_button': add_button,
+                    'frm': frm,
+                    'menu_button': back_to_menu_button,
                     }))
             return None
         else:
