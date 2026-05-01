@@ -38,7 +38,8 @@ class DataManager:
 
     def update_job(self, job_to_edit, index):
         if self.check_if_data(self, job_to_edit):
-            print(job_to_edit['job_name'].get())
+            col_names = self.data.columns.values.tolist()
+            print(self.data)
 
     @staticmethod
     def check_if_data(self, job):

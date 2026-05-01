@@ -158,43 +158,43 @@ def layout_hide_show(button_id,context):
                     'date_applied': tree.item(selected_item)['values'][4],
                     'job_status': tree.item(selected_item)['values'][5],
                 }
-            clear_layout([tree, view_all_button])
-            edit_button.config(text='GO BACK')
-            job_name_label.grid(column=0, row=3, padx=2, pady=2)
-            job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
+                clear_layout([tree, view_all_button])
+                edit_button.config(text='GO BACK')
+                job_name_label.grid(column=0, row=3, padx=2, pady=2)
+                job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
 
-            # PREPOPULATE ENTRY FIELDS WITH DATA FROM SELECTED ITEM
-            job_name_entry.insert(tk.END, job_to_edit['job_name'])
+                # PREPOPULATE ENTRY FIELDS WITH DATA FROM SELECTED ITEM
+                job_name_entry.insert(tk.END, job_to_edit['job_name'])
 
 
-            # Get index of item to be updated as str
-            index = str(data.index[data['job_name'] == job_to_edit['job_name']].tolist())
-            print(index)
+                # Get index of item to be updated as str
+                index = str(data.index[data['job_name'] == job_to_edit['job_name']].tolist())
+                print(index)
 
-            job_type_label.grid(column=0, row=4, padx=2, pady=2)
-            job_type_entry.grid(column=1, row=4, padx=2, pady=2, columnspan=2)
-            job_type_entry.insert(tk.END, job_to_edit['job_type'])
-            transport_label.grid(column=0, row=5, padx=2, pady=2)
-            transport_entry.grid(column=1, row=5, padx=2, pady=2, columnspan=2)
-            transport_entry.insert(tk.END, job_to_edit['public_transport'])
-            job_address_label.grid(column=0, row=6, padx=2, pady=2)
-            job_address_entry.grid(column=1, row=6, padx=2, pady=2, columnspan=2)
-            job_address_entry.insert(tk.END, job_to_edit['job_address'])
-            date_label.grid(column=0, row=7, padx=2, pady=2)
-            date_entry.grid(column=1, row=7, padx=2, pady=2, columnspan=2)
-            date_entry.insert(tk.END, job_to_edit['date_applied'])
-            job_status_label.grid(column=0, row=8, padx=2, pady=2)
-            job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
-            job_status_entry.insert(tk.END, job_to_edit['job_status'])
-            update_button.grid(column=2, row=2, padx=2, pady=2)
-            update_button.config(command=lambda: data_manager.update_job({
-                'job_name': job_name_entry,
-                'job_type': job_type_entry,
-                'transport': transport_entry,
-                'job_address': job_address_entry,
-                'date': date_entry,
-                'job_status': job_status_entry,
-            }, index))
+                job_type_label.grid(column=0, row=4, padx=2, pady=2)
+                job_type_entry.grid(column=1, row=4, padx=2, pady=2, columnspan=2)
+                job_type_entry.insert(tk.END, job_to_edit['job_type'])
+                transport_label.grid(column=0, row=5, padx=2, pady=2)
+                transport_entry.grid(column=1, row=5, padx=2, pady=2, columnspan=2)
+                transport_entry.insert(tk.END, job_to_edit['public_transport'])
+                job_address_label.grid(column=0, row=6, padx=2, pady=2)
+                job_address_entry.grid(column=1, row=6, padx=2, pady=2, columnspan=2)
+                job_address_entry.insert(tk.END, job_to_edit['job_address'])
+                date_label.grid(column=0, row=7, padx=2, pady=2)
+                date_entry.grid(column=1, row=7, padx=2, pady=2, columnspan=2)
+                date_entry.insert(tk.END, job_to_edit['date_applied'])
+                job_status_label.grid(column=0, row=8, padx=2, pady=2)
+                job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
+                job_status_entry.insert(tk.END, job_to_edit['job_status'])
+                update_button.grid(column=2, row=2, padx=2, pady=2)
+                update_button.config(command=lambda: data_manager.update_job({
+                    'job_name': job_name_entry,
+                    'job_type': job_type_entry,
+                    'transport': transport_entry,
+                    'job_address': job_address_entry,
+                    'date': date_entry,
+                    'job_status': job_status_entry,
+                }, index))
         else:
             clear_layout([
                 job_name_label,
