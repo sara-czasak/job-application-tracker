@@ -143,6 +143,7 @@ def layout_hide_show(button_id,context):
         edit_button = context['edit_button']
         search_button = context['search_button']
         add_button = context['add_button']
+        update_button = context['update_button']
         selected_item = tree.focus()
         job_to_edit = {}
         if not job_name_label.winfo_viewable():
@@ -178,6 +179,7 @@ def layout_hide_show(button_id,context):
             job_status_label.grid(column=0, row=8, padx=2, pady=2)
             job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
             job_status_entry.insert(tk.END, job_to_edit['job_status'])
+            update_button.grid(column=2, row=2, padx=2, pady=2)
         else:
             clear_layout([
                 job_name_label,
@@ -192,6 +194,7 @@ def layout_hide_show(button_id,context):
                 date_entry,
                 job_status_label,
                 job_status_entry,
+                edit_button
             ])
             job_name_entry.delete(0, tk.END)
             job_type_entry.delete(0, tk.END)
@@ -201,7 +204,7 @@ def layout_hide_show(button_id,context):
             job_status_entry.delete(0, tk.END)
             search_button.grid(column=2, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
-            edit_button.config(text='EDIT')
+            add_button.grid(column=1, row=2, padx=2, pady=2)
             search_button.config(text='SEARCH')
         return None
     else:
