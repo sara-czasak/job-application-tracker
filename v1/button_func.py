@@ -117,9 +117,10 @@ def convert_and_search(context):
                 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
                 back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
                 return None
-
-
         return None
+    return None
+
+
 
 
 def layout_hide_show(button_id,context):
@@ -132,25 +133,27 @@ def layout_hide_show(button_id,context):
         edit_button = context['edit_button']
         data_manager = context['data_manager']
         search_button = context['search_button']
+        delete_button = context['delete_button']
+        back_to_menu_button = context['back_to_menu_button']
         data = data_manager.load_data()
         if not tree.winfo_viewable():
             if data.empty:
                 return 'No job data added yet'
             else:
-                clear_layout([add_button,search_button])
+                clear_layout([add_button,search_button, view_all_button])
                 rows = data.iterrows()
                 tree.delete(*tree.get_children())
                 for row in rows:
                     tree.insert('', tk.END, values=list(row[1].values))
                 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
-                view_all_button.config(text='HIDE ALL')
+                back_to_menu_button.grid(column=0, row=2, padx=2, pady=2)
                 edit_button.grid(column=1, row=2, padx=2, pady=2)
+                delete_button.grid(column=2, row=2, padx=2, pady=2)
                 return None
         else:
-            clear_layout([edit_button, tree])
-            search_button.grid(column=2, row=2, padx=2, pady=2)
-            view_all_button.config(text='VIEW ALL')
-            add_button.grid(column=1, row=2, padx=2, pady=2)
+            back_to_menu_button.grid(column=0, row=2, padx=2, pady=2)
+
+
             return None
 
     # ADD BUTTON

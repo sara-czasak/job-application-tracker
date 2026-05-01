@@ -22,6 +22,8 @@ view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_s
     'edit_button': edit_button,
     'data_manager': data_manager,
     'search_button': search_button,
+    'delete_button': delete_button,
+    'back_to_menu_button': back_to_menu_button,
 }))
 view_all_button.grid(column=0, row=2, padx=2, pady=2)
 
@@ -108,6 +110,11 @@ update_button = ttk.Button(frm, text="SAVE CHANGES")
 
 update_button.grid(column=2, row=2, padx=2, pady=2)
 update_button.grid_remove()
+
+
+delete_button = ttk.Button(frm, text="DELETE")
+delete_button.grid(column=2, row=2, padx=2, pady=2)
+delete_button.grid_remove()
 
 
 back_to_menu_button = ttk.Button(frm, text="MENU", command=lambda: back_to_menu(frm, view_all_button, add_button, search_button))
