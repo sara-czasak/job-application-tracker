@@ -147,9 +147,12 @@ def layout_hide_show(button_id,context):
         data_manager = context['data_manager']
         data = data_manager.load_data()
         selected_item = tree.focus()
+        # Get index of item to be updated
+        index = int(tree.index(selected_item))
         job_to_edit = {}
         if not job_name_label.winfo_viewable():
             if selected_item:
+
                 job_to_edit = {
                     'job_name': tree.item(selected_item)['values'][0],
                     'job_type': tree.item(selected_item)['values'][1],
@@ -158,12 +161,10 @@ def layout_hide_show(button_id,context):
                     'date_applied': tree.item(selected_item)['values'][4],
                     'job_status': tree.item(selected_item)['values'][5],
                 }
+
+
                 clear_layout([tree, view_all_button])
                 edit_button.config(text='GO BACK')
-
-                # Get index of item to be updated as str
-                index = str(data.index[data['job_name'] == job_to_edit['job_name']].tolist())
-                print(index)
 
                 job_name_label.grid(column=0, row=3, padx=2, pady=2)
                 job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
@@ -198,6 +199,7 @@ def layout_hide_show(button_id,context):
                     'date': date_entry,
                     'job_status': job_status_entry,
                 }, index))
+
         else:
             clear_layout([
                 job_name_label,

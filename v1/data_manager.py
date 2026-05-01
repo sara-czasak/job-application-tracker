@@ -38,8 +38,28 @@ class DataManager:
 
     def update_job(self, job_to_edit, index):
         if self.check_if_data(self, job_to_edit):
-            col_names = self.data.columns.values.tolist()
-            print(self.data)
+            if not index:
+                print('Nothing to update')
+            else:
+                col_names = self.data.columns.values.tolist()
+                print(index)
+
+
+                self.data.at[index, col_names[0]] = job_to_edit['job_name'].get()
+                self.data.at[index, col_names[1]] = job_to_edit['job_type'].get()
+                self.data.at[index, col_names[2]] = job_to_edit['transport'].get()
+                self.data.at[index, col_names[3]] = job_to_edit['job_address'].get()
+                self.data.at[index, col_names[4]] = job_to_edit['date'].get()
+                self.data.at[index, col_names[0]] = job_to_edit['job_status'].get()
+
+                self.data.to_csv('job_data.csv', index=False)
+                job_to_edit['job_name'].delete(0, tk.END)
+                job_to_edit['job_type'].delete(0, tk.END)
+                job_to_edit['transport'].delete(0, tk.END)
+                job_to_edit['job_address'].delete(0, tk.END)
+                job_to_edit['date'].delete(0, tk.END)
+                job_to_edit['job_status'].delete(0, tk.END)
+                return True
 
     @staticmethod
     def check_if_data(self, job):
