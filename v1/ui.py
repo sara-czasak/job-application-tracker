@@ -15,7 +15,7 @@ frm = ttk.Frame(root, padding=10)
 frm.grid()
 
 
-view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all', frm, {
+view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all',{
     'tree': tree,
     'view_all_button': view_all_button,
     'add_button': add_button,
@@ -25,7 +25,7 @@ view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_s
 }))
 view_all_button.grid(column=0, row=2, padx=2, pady=2)
 
-add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_button', frm,{
+add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_button',{
     'job_name_label': job_name_label,
     'job_name_entry': job_name_entry,
     'job_type_label': job_type_label,
@@ -57,7 +57,7 @@ add_job_button = ttk.Button(frm, text='SAVE', command=lambda: data_manager.save_
 add_job_button.grid(column=2, row=2, padx=2, pady=2)
 add_job_button.grid_remove()
 
-search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show('search_button',frm, {
+search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show('search_button',{
     'view_all_button': view_all_button,
     'add_button': add_button,
     'search_bar': search_bar,
@@ -68,7 +68,7 @@ search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show(
 }))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
-edit_button = ttk.Button(frm, text="EDIT", command=lambda: layout_hide_show('edit_button',frm, {
+edit_button = ttk.Button(frm, text="EDIT", command=lambda: layout_hide_show('edit_button',{
     'tree': tree,
     'job_name_label': job_name_label,
     'job_name_entry': job_name_entry,

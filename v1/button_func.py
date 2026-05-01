@@ -1,7 +1,11 @@
 import tkinter as tk
 
 
-def layout_hide_show(button_id, frm, context):
+def clear_layout(items):
+    for i in items:
+        i.grid_remove()
+
+def layout_hide_show(button_id,context):
 
     # VIEW ALL BUTTON
     if button_id == 'view_all':
@@ -16,18 +20,16 @@ def layout_hide_show(button_id, frm, context):
             if data.empty:
                 return 'No job data added yet'
             else:
+                clear_layout([add_button,search_button])
                 rows = data.iterrows()
                 for row in rows:
                     tree.insert('', tk.END, values=list(row[1].values))
                 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
                 view_all_button.config(text='HIDE ALL')
                 edit_button.grid(column=1, row=2, padx=2, pady=2)
-                add_button.grid_remove()
-                search_button.grid_remove()
                 return None
         else:
-            edit_button.grid_remove()
-            tree.grid_remove()
+            clear_layout([edit_button, tree])
             search_button.grid(column=2, row=2, padx=2, pady=2)
             view_all_button.config(text='VIEW ALL')
             add_button.grid(column=1, row=2, padx=2, pady=2)
@@ -52,6 +54,7 @@ def layout_hide_show(button_id, frm, context):
         search_button = context['search_button']
         add_job_button = context['add_job_button']
         if not job_name_label.winfo_viewable():
+            clear_layout([view_all_button, search_button])
             job_name_label.grid(column=0, row=3, padx=2, pady=2)
             job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
             job_type_label.grid(column=0, row=4, padx=2, pady=2)
@@ -66,28 +69,27 @@ def layout_hide_show(button_id, frm, context):
             job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
             add_button.config(text='GO BACK')
             add_job_button.grid(column=2, row=2, padx=2, pady=2)
-
-            view_all_button.grid_remove()
-            search_button.grid_remove()
             return None
         else:
-            job_name_label.grid_remove()
-            job_name_entry.grid_remove()
+            clear_layout([
+                job_name_label,
+                job_name_entry,
+                job_type_label,
+                job_type_entry,
+                transport_label,
+                transport_entry,
+                job_address_label,
+                job_address_entry,
+                date_label,
+                date_entry,
+                job_status_label,
+                job_status_entry,
+            ])
             job_name_entry.delete(0, tk.END)
-            job_type_label.grid_remove()
-            job_type_entry.grid_remove()
             job_type_entry.delete(0, tk.END)
-            transport_label.grid_remove()
-            transport_entry.grid_remove()
             transport_entry.delete(0, tk.END)
-            job_address_label.grid_remove()
-            job_address_entry.grid_remove()
             job_address_entry.delete(0, tk.END)
-            date_label.grid_remove()
-            date_entry.grid_remove()
             date_entry.delete(0, tk.END)
-            job_status_label.grid_remove()
-            job_status_entry.grid_remove()
             job_status_entry.delete(0, tk.END)
             search_button.grid(column=2, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
@@ -104,22 +106,19 @@ def layout_hide_show(button_id, frm, context):
         search_by_options = context['search_by_options']
         opt = context['opt']
         if not search_bar.winfo_viewable():
+            clear_layout([view_all_button, add_button])
             search_bar.grid(column=0, row=3, padx=2, pady=2)
             search_by_options.grid(column=2, row=3, padx=2, pady=2)
             search_button.config(text='GO BACK')
             search_button.grid(column=1, row=2, padx=2, pady=2)
             find_button.grid(column=2, row=2, padx=2, pady=2)
-            add_button.grid_remove()
-            view_all_button.grid_remove()
             return None
         else:
+            clear_layout([find_button, search_by_options,search_bar])
             search_button.config(text='SEARCH')
             search_button.grid(column=2, row=2, padx=2, pady=2)
             opt.set("SEARCH BY")
-            search_by_options.grid_remove()
-            find_button.grid_remove()
             search_bar.delete(0, tk.END)
-            search_bar.grid_remove()
             add_button.grid(column=1, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
             return None
@@ -154,8 +153,7 @@ def layout_hide_show(button_id, frm, context):
                 'job_status': tree.item(selected_item)['values'][5],
             }
         if not job_name_label.winfo_viewable():
-            tree.grid_remove()
-            view_all_button.grid_remove()
+            clear_layout([tree, view_all_button])
             edit_button.config(text='GO BACK')
             job_name_label.grid(column=0, row=3, padx=2, pady=2)
             job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
@@ -170,23 +168,25 @@ def layout_hide_show(button_id, frm, context):
             job_status_label.grid(column=0, row=8, padx=2, pady=2)
             job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
         else:
-            job_name_label.grid_remove()
-            job_name_entry.grid_remove()
+            clear_layout([
+                job_name_label,
+                job_name_entry,
+                job_type_label,
+                job_type_entry,
+                transport_label,
+                transport_entry,
+                job_address_label,
+                job_address_entry,
+                date_label,
+                date_entry,
+                job_status_label,
+                job_status_entry,
+            ])
             job_name_entry.delete(0, tk.END)
-            job_type_label.grid_remove()
-            job_type_entry.grid_remove()
             job_type_entry.delete(0, tk.END)
-            transport_label.grid_remove()
-            transport_entry.grid_remove()
             transport_entry.delete(0, tk.END)
-            job_address_label.grid_remove()
-            job_address_entry.grid_remove()
             job_address_entry.delete(0, tk.END)
-            date_label.grid_remove()
-            date_entry.grid_remove()
             date_entry.delete(0, tk.END)
-            job_status_label.grid_remove()
-            job_status_entry.grid_remove()
             job_status_entry.delete(0, tk.END)
             search_button.grid(column=2, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
@@ -197,7 +197,4 @@ def layout_hide_show(button_id, frm, context):
         return None
 
 
-def clear_layout(frm):
-    for child in frm.children.values():
-        child.grid_remove()
-        print('Cleaning done')
+
