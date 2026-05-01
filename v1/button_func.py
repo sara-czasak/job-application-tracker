@@ -160,32 +160,35 @@ def layout_hide_show(button_id,context):
                 }
                 clear_layout([tree, view_all_button])
                 edit_button.config(text='GO BACK')
-                job_name_label.grid(column=0, row=3, padx=2, pady=2)
-                job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
-
-                # PREPOPULATE ENTRY FIELDS WITH DATA FROM SELECTED ITEM
-                job_name_entry.insert(tk.END, job_to_edit['job_name'])
-
 
                 # Get index of item to be updated as str
                 index = str(data.index[data['job_name'] == job_to_edit['job_name']].tolist())
                 print(index)
 
+                job_name_label.grid(column=0, row=3, padx=2, pady=2)
+                job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
+                job_name_entry.insert(tk.END, job_to_edit['job_name'])
+
                 job_type_label.grid(column=0, row=4, padx=2, pady=2)
                 job_type_entry.grid(column=1, row=4, padx=2, pady=2, columnspan=2)
                 job_type_entry.insert(tk.END, job_to_edit['job_type'])
+
                 transport_label.grid(column=0, row=5, padx=2, pady=2)
                 transport_entry.grid(column=1, row=5, padx=2, pady=2, columnspan=2)
                 transport_entry.insert(tk.END, job_to_edit['public_transport'])
+
                 job_address_label.grid(column=0, row=6, padx=2, pady=2)
                 job_address_entry.grid(column=1, row=6, padx=2, pady=2, columnspan=2)
                 job_address_entry.insert(tk.END, job_to_edit['job_address'])
+
                 date_label.grid(column=0, row=7, padx=2, pady=2)
                 date_entry.grid(column=1, row=7, padx=2, pady=2, columnspan=2)
                 date_entry.insert(tk.END, job_to_edit['date_applied'])
+
                 job_status_label.grid(column=0, row=8, padx=2, pady=2)
                 job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
                 job_status_entry.insert(tk.END, job_to_edit['job_status'])
+
                 update_button.grid(column=2, row=2, padx=2, pady=2)
                 update_button.config(command=lambda: data_manager.update_job({
                     'job_name': job_name_entry,
@@ -209,7 +212,8 @@ def layout_hide_show(button_id,context):
                 date_entry,
                 job_status_label,
                 job_status_entry,
-                edit_button
+                edit_button,
+                update_button,
             ])
             job_name_entry.delete(0, tk.END)
             job_type_entry.delete(0, tk.END)
@@ -221,6 +225,8 @@ def layout_hide_show(button_id,context):
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
             add_button.grid(column=1, row=2, padx=2, pady=2)
             search_button.config(text='SEARCH')
+            view_all_button.config(text='VIEW ALL')
+
         return None
     else:
         return None
