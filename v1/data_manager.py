@@ -37,9 +37,10 @@ class DataManager:
 
 
     def update_job(self, job_to_edit, index):
-        if self.check_if_data(self, job_to_edit):
+        if self.check_if_data(job_to_edit):
             if not index:
                 print('Nothing to update')
+                return None
             else:
                 col_names = self.data.columns.values.tolist()
                 print(index)
@@ -59,9 +60,10 @@ class DataManager:
                 job_to_edit['job_address'].delete(0, tk.END)
                 job_to_edit['date'].delete(0, tk.END)
                 job_to_edit['job_status'].delete(0, tk.END)
-                return True
+                return None
+            return None
 
-    @staticmethod
+
     def check_if_data(self, job):
         if job['job_name'].get() != '' and job['job_type'].get() != '' and job['transport'].get() != '' and job['job_address'].get() != '' and job['date'].get() != '' and job['job_status'].get() != '':
             return True

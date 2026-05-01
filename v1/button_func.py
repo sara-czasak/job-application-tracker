@@ -228,6 +228,7 @@ def layout_hide_show(button_id,context):
             add_button.grid(column=1, row=2, padx=2, pady=2)
             search_button.config(text='SEARCH')
             view_all_button.config(text='VIEW ALL')
+            edit_button.config(text='EDIT')
 
         return None
     else:
