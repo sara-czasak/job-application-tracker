@@ -16,7 +16,7 @@ class DataManager:
 
 
     def save_new_job(self, new_job_data):
-        if new_job_data['job_name'] != '' and new_job_data['job_type'] != '' and new_job_data['transport'] != '' and new_job_data['job_address'] != '' and new_job_data['date'] != '' and new_job_data['job_status']!= '':
+        if new_job_data['job_name'].get() != '' and new_job_data['job_type'].get() != '' and new_job_data['transport'].get() != '' and new_job_data['job_address'].get() != '' and new_job_data['date'].get() != '' and new_job_data['job_status'].get() != '':
             new_job = pd.DataFrame([{
                 'job_name': new_job_data['job_name'].get(),
                 'job_type': new_job_data['job_type'].get(),

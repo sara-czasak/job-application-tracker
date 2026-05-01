@@ -22,6 +22,7 @@ def layout_hide_show(button_id,context):
             else:
                 clear_layout([add_button,search_button])
                 rows = data.iterrows()
+                tree.delete(*tree.get_children())
                 for row in rows:
                     tree.insert('', tk.END, values=list(row[1].values))
                 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
