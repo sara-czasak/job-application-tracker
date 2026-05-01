@@ -384,8 +384,33 @@ def layout_hide_show(button_id,context):
             search_button.config(text='SEARCH')
             view_all_button.config(text='VIEW ALL')
             edit_button.config(text='EDIT')
+        return None
 
+    elif button_id == 'delete_button':
+        tree = context['tree']
+        data_manager = context['data_manager']
+        data = data_manager.load_data()
+        item_to_delete = tree.focus()
+        index = int(tree.index(item_to_delete))
+        if item_to_delete:
+            data_manager.delete_row(index)
         return None
     else:
         return None
 
+
+def delete_job(tree, data_manager):
+    data = data_manager.load_data()
+    item_to_delete = tree.focus()
+    index = int(tree.index(item_to_delete))
+    if item_to_delete:
+        new_data = data_manager.delete_row(index)
+        if new_data.empty:
+            return 'No job data added yet'
+        else:
+            rows = new_data.iterrows()
+            tree.delete(*tree.get_children())
+            for row in rows:
+                tree.insert('', tk.END, values=list(row[1].values))
+            tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
+    return None

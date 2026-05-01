@@ -74,3 +74,10 @@ class DataManager:
         except KeyError:
             print('No data found')
             return None
+
+
+    def delete_row(self, index):
+        print(index)
+        self.data = self.data.drop(index)
+        self.data.to_csv('job_data.csv', index=False)
+        return self.data

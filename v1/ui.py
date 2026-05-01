@@ -107,12 +107,11 @@ find_button.grid_remove()
 
 
 update_button = ttk.Button(frm, text="SAVE CHANGES")
-
 update_button.grid(column=2, row=2, padx=2, pady=2)
 update_button.grid_remove()
 
 
-delete_button = ttk.Button(frm, text="DELETE")
+delete_button = ttk.Button(frm, text="DELETE", command=lambda: delete_job(tree, data_manager))
 delete_button.grid(column=2, row=2, padx=2, pady=2)
 delete_button.grid_remove()
 
