@@ -95,7 +95,9 @@ find_button.grid(column=2, row=2, padx=2, pady=2)
 find_button.grid_remove()
 
 
-save_changes_button = ttk.Button(frm, text="SAVE ")
+update_button = ttk.Button(frm, text="SAVE CHANGES")
+update_button.grid(column=2, row=2, padx=2, pady=2)
+update_button.grid_remove()
 
 
 # DISPLAY ALL JOBS

@@ -144,30 +144,40 @@ def layout_hide_show(button_id,context):
         search_button = context['search_button']
         add_button = context['add_button']
         selected_item = tree.focus()
-        if selected_item:
-            job_to_edit = {
-                'job_name': tree.item(selected_item)['values'][0],
-                'job_type': tree.item(selected_item)['values'][1],
-                'public_transport': tree.item(selected_item)['values'][2],
-                'job_address': tree.item(selected_item)['values'][3],
-                'date_applied': tree.item(selected_item)['values'][4],
-                'job_status': tree.item(selected_item)['values'][5],
-            }
+        job_to_edit = {}
         if not job_name_label.winfo_viewable():
+            if selected_item:
+                job_to_edit = {
+                    'job_name': tree.item(selected_item)['values'][0],
+                    'job_type': tree.item(selected_item)['values'][1],
+                    'public_transport': tree.item(selected_item)['values'][2],
+                    'job_address': tree.item(selected_item)['values'][3],
+                    'date_applied': tree.item(selected_item)['values'][4],
+                    'job_status': tree.item(selected_item)['values'][5],
+                }
             clear_layout([tree, view_all_button])
             edit_button.config(text='GO BACK')
             job_name_label.grid(column=0, row=3, padx=2, pady=2)
             job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
+
+            # PREPOPULATE ENTRY FIELDS WITH DATA FROM SELECTED ITEM
+            job_name_entry.insert(tk.END, job_to_edit['job_name'])
+
             job_type_label.grid(column=0, row=4, padx=2, pady=2)
             job_type_entry.grid(column=1, row=4, padx=2, pady=2, columnspan=2)
+            job_type_entry.insert(tk.END, job_to_edit['job_type'])
             transport_label.grid(column=0, row=5, padx=2, pady=2)
             transport_entry.grid(column=1, row=5, padx=2, pady=2, columnspan=2)
+            transport_entry.insert(tk.END, job_to_edit['public_transport'])
             job_address_label.grid(column=0, row=6, padx=2, pady=2)
             job_address_entry.grid(column=1, row=6, padx=2, pady=2, columnspan=2)
+            job_address_entry.insert(tk.END, job_to_edit['job_address'])
             date_label.grid(column=0, row=7, padx=2, pady=2)
             date_entry.grid(column=1, row=7, padx=2, pady=2, columnspan=2)
+            date_entry.insert(tk.END, job_to_edit['date_applied'])
             job_status_label.grid(column=0, row=8, padx=2, pady=2)
             job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
+            job_status_entry.insert(tk.END, job_to_edit['job_status'])
         else:
             clear_layout([
                 job_name_label,
@@ -196,6 +206,3 @@ def layout_hide_show(button_id,context):
         return None
     else:
         return None
-
-
-
