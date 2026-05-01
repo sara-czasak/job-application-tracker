@@ -87,6 +87,7 @@ edit_button = ttk.Button(frm, text="EDIT", command=lambda: layout_hide_show('edi
     'search_button': search_button,
     'add_button': add_button,
     'update_button': update_button,
+    'data_manager': data_manager,
 }))
 edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()
@@ -96,14 +97,7 @@ find_button.grid(column=2, row=2, padx=2, pady=2)
 find_button.grid_remove()
 
 
-update_button = ttk.Button(frm, text="SAVE CHANGES", command=lambda: data_manager.update_job({
-    'job_name': job_name_entry,
-    'job_type': job_type_entry,
-    'transport': transport_entry,
-    'job_address': job_address_entry,
-    'date': date_entry,
-    'job_status': job_status_entry,
-}))
+update_button = ttk.Button(frm, text="SAVE CHANGES")
 
 update_button.grid(column=2, row=2, padx=2, pady=2)
 update_button.grid_remove()

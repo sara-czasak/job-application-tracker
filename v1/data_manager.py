@@ -6,6 +6,7 @@ class DataManager:
     def __init__(self):
         self.data = self.load_data()
 
+
     def load_data(self):
         try:
             data = pd.read_csv('job_data.csv')
@@ -16,7 +17,7 @@ class DataManager:
 
 
     def save_new_job(self, new_job_data):
-        if self.check_if_data(new_job_data):
+        if self.check_if_data(self, new_job_data):
             new_job = pd.DataFrame([{
                 'job_name': new_job_data['job_name'].get(),
                 'job_type': new_job_data['job_type'].get(),
@@ -35,11 +36,11 @@ class DataManager:
             new_job_data['job_status'].delete(0, tk.END)
 
 
-    def update_job(self, job_to_edit):
-        if self.check_if_data(job_to_edit):
+    def update_job(self, job_to_edit, index):
+        if self.check_if_data(self, job_to_edit):
             print(job_to_edit['job_name'].get())
 
-
+    @staticmethod
     def check_if_data(self, job):
         if job['job_name'].get() != '' and job['job_type'].get() != '' and job['transport'].get() != '' and job['job_address'].get() != '' and job['date'].get() != '' and job['job_status'].get() != '':
             return True

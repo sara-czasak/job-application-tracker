@@ -144,6 +144,8 @@ def layout_hide_show(button_id,context):
         search_button = context['search_button']
         add_button = context['add_button']
         update_button = context['update_button']
+        data_manager = context['data_manager']
+        data = data_manager.load_data()
         selected_item = tree.focus()
         job_to_edit = {}
         if not job_name_label.winfo_viewable():
@@ -164,6 +166,11 @@ def layout_hide_show(button_id,context):
             # PREPOPULATE ENTRY FIELDS WITH DATA FROM SELECTED ITEM
             job_name_entry.insert(tk.END, job_to_edit['job_name'])
 
+
+            # Get index of item to be updated as str
+            index = str(data.index[data['job_name'] == job_to_edit['job_name']].tolist())
+            print(index)
+
             job_type_label.grid(column=0, row=4, padx=2, pady=2)
             job_type_entry.grid(column=1, row=4, padx=2, pady=2, columnspan=2)
             job_type_entry.insert(tk.END, job_to_edit['job_type'])
@@ -180,6 +187,14 @@ def layout_hide_show(button_id,context):
             job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
             job_status_entry.insert(tk.END, job_to_edit['job_status'])
             update_button.grid(column=2, row=2, padx=2, pady=2)
+            update_button.config(command=lambda: data_manager.update_job({
+                'job_name': job_name_entry,
+                'job_type': job_type_entry,
+                'transport': transport_entry,
+                'job_address': job_address_entry,
+                'date': date_entry,
+                'job_status': job_status_entry,
+            }, index))
         else:
             clear_layout([
                 job_name_label,
