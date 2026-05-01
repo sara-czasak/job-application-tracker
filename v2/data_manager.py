@@ -37,7 +37,7 @@ class DataManager:
 
 
     def update_job(self, job_to_edit, index):
-        # global is_updated
+        global is_updated
         if self.check_if_data(job_to_edit):
             if index is None:
                 print('Nothing to update')

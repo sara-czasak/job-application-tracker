@@ -34,7 +34,6 @@ def save_changes_func(context, index):
     add_button = context['add_button']
     view_all_button = context['view_all_button']
     delete_button = context['delete_button']
-    back_to_menu_button = context['back_to_menu_button']
 
     updated = data_manager.update_job({
         'job_name': job_name,
@@ -74,7 +73,6 @@ def save_changes_func(context, index):
         search_button.config(text='SEARCH')
         view_all_button.config(text='VIEW ALL')
         edit_button.config(text='EDIT')
-        back_to_menu_button.grid_remove()
 
 
 def convert_and_search(context):
@@ -291,7 +289,6 @@ def layout_hide_show(button_id,context):
         update_button = context['update_button']
         data_manager = context['data_manager']
         delete_button = context['delete_button']
-        back_to_menu_button = context['back_to_menu_button']
         data = data_manager.load_data()
         selected_item = tree.focus()
         # Get index of item to be updated
@@ -359,8 +356,6 @@ def layout_hide_show(button_id,context):
                         'view_all_button': view_all_button,
                         'add_button': add_button,
                         'search_button': search_button,
-                        'delete_button': delete_button,
-                        'back_to_menu_button': back_to_menu_button,
                 }, index))
 
         else:
