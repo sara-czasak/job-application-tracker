@@ -123,7 +123,15 @@ def layout_hide_show(button_id, context):
 def edit_func(tree):
     selected_item = tree.focus()
     if selected_item:
+        job_to_edit = {
+            'job_name': tree.item(selected_item)['values'][0],
+            'job_type': tree.item(selected_item)['values'][1],
+            'public_transport': tree.item(selected_item)['values'][2],
+            'job_address': tree.item(selected_item)['values'][3],
+            'date_applied': tree.item(selected_item)['values'][4],
+            'job_status': tree.item(selected_item)['values'][5],
+        }
         # Add funtionality to call edit button with values from current item.
         # then remove tree view from screen
         # show add screen with values from current item prefilled into the entry fields
-        pass
+        print(job_to_edit)
