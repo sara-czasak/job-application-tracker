@@ -8,6 +8,7 @@ def layout_hide_show(button_id, context):
         tree = context['tree']
         edit_button = context['edit_button']
         data_manager = context['data_manager']
+        search_button = context['search_button']
         data = data_manager.load_data()
         if not tree.winfo_viewable():
             if data.empty:
@@ -20,6 +21,7 @@ def layout_hide_show(button_id, context):
                 view_all_button.config(text='HIDE ALL')
                 edit_button.grid(column=1, row=2, padx=2, pady=2)
                 add_button.grid_remove()
+                search_button.grid_remove()
                 return None
         else:
             edit_button.grid_remove()
@@ -117,3 +119,11 @@ def layout_hide_show(button_id, context):
     else:
         return None
 
+
+def edit_func(tree):
+    selected_item = tree.focus()
+    if selected_item:
+        # Add funtionality to call edit button with values from current item.
+        # then remove tree view from screen
+        # show add screen with values from current item prefilled into the entry fields
+        pass

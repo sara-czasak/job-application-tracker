@@ -21,6 +21,7 @@ view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_s
     'add_button': add_button,
     'edit_button': edit_button,
     'data_manager': data_manager,
+    'search_button': search_button,
 }))
 view_all_button.grid(column=0, row=2, padx=2, pady=2)
 
@@ -67,7 +68,7 @@ search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show(
 }))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
-edit_button = ttk.Button(frm, text="EDIT")
+edit_button = ttk.Button(frm, text="EDIT", command=lambda: edit_func(tree))
 edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()
 
