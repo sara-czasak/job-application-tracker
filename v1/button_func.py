@@ -5,6 +5,65 @@ def clear_layout(items):
     for i in items:
         i.grid_remove()
 
+
+def save_changes_func(config, index):
+    update_button = config['update_button']
+    job_name = config['job_name']
+    job_type = config['job_type']
+    transport = config['transport']
+    job_address = config['job_address']
+    date = config['date']
+    job_status = config['job_status']
+    data_manager = config['data_manager']
+    job_name_label = config['job_name_label']
+    job_type_label = config['job_type_label']
+    transport_label = config['transport_label']
+    job_address_label = config['job_address_label']
+    date_label = config['date_label']
+    job_status_label = config['job_status_label']
+    edit_button = config['edit_button']
+    search_button = config['search_button']
+    add_button = config['add_button']
+    view_all_button = config['view_all_button']
+
+    updated = data_manager.update_job({
+        'job_name': job_name,
+        'job_type': job_type,
+        'transport': transport,
+        'job_address': job_address,
+        'date': date,
+        'job_status': job_status,
+    }, index)
+    if updated:
+        clear_layout([
+            job_name_label,
+            job_name,
+            job_type_label,
+            job_type,
+            transport_label,
+            transport,
+            job_address_label,
+            job_address,
+            date_label,
+            date,
+            job_status_label,
+            job_status,
+            edit_button,
+            update_button,
+        ])
+        job_name.delete(0, tk.END)
+        job_type.delete(0, tk.END)
+        transport.delete(0, tk.END)
+        job_address.delete(0, tk.END)
+        date.delete(0, tk.END)
+        job_status.delete(0, tk.END)
+        search_button.grid(column=2, row=2, padx=2, pady=2)
+        view_all_button.grid(column=0, row=2, padx=2, pady=2)
+        add_button.grid(column=1, row=2, padx=2, pady=2)
+        search_button.config(text='SEARCH')
+        view_all_button.config(text='VIEW ALL')
+        edit_button.config(text='EDIT')
+
 def layout_hide_show(button_id,context):
 
     # VIEW ALL BUTTON
@@ -190,14 +249,28 @@ def layout_hide_show(button_id,context):
                 job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
                 job_status_entry.insert(tk.END, job_to_edit['job_status'])
 
+
                 update_button.grid(column=2, row=2, padx=2, pady=2)
-                update_button.config(command=lambda: data_manager.update_job({
-                    'job_name': job_name_entry,
-                    'job_type': job_type_entry,
-                    'transport': transport_entry,
-                    'job_address': job_address_entry,
-                    'date': date_entry,
-                    'job_status': job_status_entry,
+                update_button.grid(column=2, row=2, padx=2, pady=2)
+                update_button.config(command=lambda: save_changes_func({
+                        'update_button': update_button,
+                        'job_name': job_name_entry,
+                        'job_name_label': job_name_label,
+                        'job_type': job_type_entry,
+                        'job_type_label': job_type_label,
+                        'transport': transport_entry,
+                        'transport_label': transport_label,
+                        'job_address': job_address_entry,
+                        'job_address_label': job_address_label,
+                        'date': date_entry,
+                        'date_label': date_label,
+                        'job_status': job_status_entry,
+                        'job_status_label': job_status_label,
+                        'data_manager': data_manager,
+                        'edit_button': edit_button,
+                        'view_all_button': view_all_button,
+                        'add_button': add_button,
+                        'search_button': search_button,
                 }, index))
 
         else:

@@ -37,10 +37,11 @@ class DataManager:
 
 
     def update_job(self, job_to_edit, index):
+        global is_updated
         if self.check_if_data(job_to_edit):
             if not index:
                 print('Nothing to update')
-                return None
+                return False
             else:
                 col_names = self.data.columns.values.tolist()
                 print(index)
@@ -51,17 +52,12 @@ class DataManager:
                 self.data.at[index, col_names[2]] = job_to_edit['transport'].get()
                 self.data.at[index, col_names[3]] = job_to_edit['job_address'].get()
                 self.data.at[index, col_names[4]] = job_to_edit['date'].get()
-                self.data.at[index, col_names[0]] = job_to_edit['job_status'].get()
+                self.data.at[index, col_names[5]] = job_to_edit['job_status'].get()
 
                 self.data.to_csv('job_data.csv', index=False)
-                job_to_edit['job_name'].delete(0, tk.END)
-                job_to_edit['job_type'].delete(0, tk.END)
-                job_to_edit['transport'].delete(0, tk.END)
-                job_to_edit['job_address'].delete(0, tk.END)
-                job_to_edit['date'].delete(0, tk.END)
-                job_to_edit['job_status'].delete(0, tk.END)
-                return None
-            return None
+                return True
+        else:
+            return False
 
 
     def check_if_data(self, job):
