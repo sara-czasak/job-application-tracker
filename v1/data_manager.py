@@ -17,7 +17,7 @@ class DataManager:
 
 
     def save_new_job(self, new_job_data):
-        if self.check_if_data(self, new_job_data):
+        if self.check_if_data(new_job_data):
             new_job = pd.DataFrame([{
                 'job_name': new_job_data['job_name'].get(),
                 'job_type': new_job_data['job_type'].get(),
@@ -65,3 +65,12 @@ class DataManager:
             return True
         else:
             return False
+
+
+    def find_rows(self, col_name, value):
+        try:
+            rows = self.data[self.data[col_name] == value]
+            return rows
+        except KeyError:
+            print('No data found')
+            return None

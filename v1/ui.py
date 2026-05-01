@@ -65,6 +65,9 @@ search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show(
     'find_button': find_button,
     'search_by_options': search_by_options,
     'opt': opt,
+    'data_manager': data_manager,
+    'tree': tree,
+    'edit_button': edit_button,
 }))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
@@ -91,6 +94,7 @@ edit_button = ttk.Button(frm, text="EDIT", command=lambda: layout_hide_show('edi
 }))
 edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()
+
 
 find_button = ttk.Button(frm, text="FIND")
 find_button.grid(column=2, row=2, padx=2, pady=2)

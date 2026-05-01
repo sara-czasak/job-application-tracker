@@ -6,25 +6,25 @@ def clear_layout(items):
         i.grid_remove()
 
 
-def save_changes_func(config, index):
-    update_button = config['update_button']
-    job_name = config['job_name']
-    job_type = config['job_type']
-    transport = config['transport']
-    job_address = config['job_address']
-    date = config['date']
-    job_status = config['job_status']
-    data_manager = config['data_manager']
-    job_name_label = config['job_name_label']
-    job_type_label = config['job_type_label']
-    transport_label = config['transport_label']
-    job_address_label = config['job_address_label']
-    date_label = config['date_label']
-    job_status_label = config['job_status_label']
-    edit_button = config['edit_button']
-    search_button = config['search_button']
-    add_button = config['add_button']
-    view_all_button = config['view_all_button']
+def save_changes_func(context, index):
+    update_button = context['update_button']
+    job_name = context['job_name']
+    job_type = context['job_type']
+    transport = context['transport']
+    job_address = context['job_address']
+    date = context['date']
+    job_status = context['job_status']
+    data_manager = context['data_manager']
+    job_name_label = context['job_name_label']
+    job_type_label = context['job_type_label']
+    transport_label = context['transport_label']
+    job_address_label = context['job_address_label']
+    date_label = context['date_label']
+    job_status_label = context['job_status_label']
+    edit_button = context['edit_button']
+    search_button = context['search_button']
+    add_button = context['add_button']
+    view_all_button = context['view_all_button']
 
     updated = data_manager.update_job({
         'job_name': job_name,
@@ -63,6 +63,59 @@ def save_changes_func(config, index):
         search_button.config(text='SEARCH')
         view_all_button.config(text='VIEW ALL')
         edit_button.config(text='EDIT')
+
+
+def convert_and_search(context):
+    opt = context['opt']
+    data_manager = context['data_manager']
+    search_bar = context['search_bar']
+    tree = context['tree']
+    search_button = context['search_button']
+    search_by = context['search_by_options']
+    find_button = context['find_button']
+    view_all_button = context['view_all_button']
+    edit_button = context['edit_button']
+    add_button = context['add_button']
+
+    if opt.get() == "job name":
+        opt = 'job_name'
+    elif opt.get() == "date":
+        opt = 'date_applied'
+    elif opt.get() == 'type':
+        opt = 'job_type'
+    elif opt.get() == 'bus/tram stop':
+        opt = 'public_transport'
+    elif opt.get() == 'status':
+        opt = 'job_status'
+    else:
+        opt = ''
+
+    rows = ''
+
+    if opt != '':
+        data = data_manager.find_rows(opt, search_bar.get())
+
+        if data is not None:
+            if data.empty:
+                return 'No data found'
+            else:
+                clear_layout([search_bar, search_by, find_button, search_button, add_button])
+                rows = data.iterrows()
+                tree.delete(*tree.get_children())
+                for row in rows:
+                    tree.insert('', tk.END, values=list(row[1].values))
+                tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
+                # search_button.config(text='GO BACK')
+                # search_button.grid(column=2, row=2, padx=2, pady=2)
+                return None
+        # else:
+        #     clear_layout([edit_button, tree, search_button])
+        #     search_button.grid(column=2, row=2, padx=2, pady=2)
+        #     view_all_button.config(text='VIEW ALL')
+        #     add_button.grid(column=1, row=2, padx=2, pady=2)
+
+        return None
+
 
 def layout_hide_show(button_id,context):
 
@@ -164,7 +217,10 @@ def layout_hide_show(button_id,context):
         search_button = context['search_button']
         find_button = context['find_button']
         search_by_options = context['search_by_options']
+        data_manager = context['data_manager']
         opt = context['opt']
+        tree = context['tree']
+
         if not search_bar.winfo_viewable():
             clear_layout([view_all_button, add_button])
             search_bar.grid(column=0, row=3, padx=2, pady=2)
@@ -172,9 +228,22 @@ def layout_hide_show(button_id,context):
             search_button.config(text='GO BACK')
             search_button.grid(column=1, row=2, padx=2, pady=2)
             find_button.grid(column=2, row=2, padx=2, pady=2)
+
+            find_button.config(command=lambda: convert_and_search({
+                    'opt': opt,
+                    'data_manager': data_manager,
+                    'search_bar': search_bar,
+                    'search_button': search_button,
+                    'tree': tree,
+                    'search_by_options': search_by_options,
+                    'find_button': find_button,
+                    'view_all_button': view_all_button,
+                    'edit_button': add_button,
+                    'add_button': add_button,
+                    }))
             return None
         else:
-            clear_layout([find_button, search_by_options,search_bar])
+            clear_layout([find_button, search_by_options, search_bar])
             search_button.config(text='SEARCH')
             search_button.grid(column=2, row=2, padx=2, pady=2)
             opt.set("SEARCH BY")
@@ -306,3 +375,4 @@ def layout_hide_show(button_id,context):
         return None
     else:
         return None
+
