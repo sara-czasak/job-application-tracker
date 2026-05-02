@@ -18,6 +18,12 @@ def clear_layout(items):
     for i in items:
         i.grid_remove()
 
+
+def clear_entries(entries):
+    for entry in entries:
+        entry.delete(0, tk.END)
+
+
 # Handle entry deletion
 def delete_job(tree, data_manager):
     data = data_manager.load_data()
@@ -65,6 +71,7 @@ def save_changes_func(context, index):
     view_all_button = context['view_all_button']
     delete_button = context['delete_button']
     back_to_menu_button = context['back_to_menu_button']
+    frm = context['frm']
 
     data_dict = {
         'job_name': job_name,
@@ -78,34 +85,12 @@ def save_changes_func(context, index):
     # Update data frame
     updated = data_manager.update_job(data_dict, index)
     if updated:
-        job_name.delete(0, tk.END)
-        job_type.delete(0, tk.END)
-        transport.delete(0, tk.END)
-        job_address.delete(0, tk.END)
-        date.delete(0, tk.END)
-        job_status.delete(0, tk.END)
+        clear_entries([job_name, job_type, transport, job_address, date, job_status])
         search_button.grid(column=2, row=2, padx=2, pady=2)
         view_all_button.grid(column=0, row=2, padx=2, pady=2)
         add_button.grid(column=1, row=2, padx=2, pady=2)
         # Handle removing unneeded widgets and resetting ui to home screen
-        back_to_menu_button([
-            job_name_label,
-            job_name,
-            job_type_label,
-            job_type,
-            transport_label,
-            transport,
-            job_address_label,
-            job_address,
-            date_label,
-            date,
-            job_status_label,
-            job_status,
-            edit_button,
-            update_button,
-            delete_button,
-        ])
-        back_to_menu_button.grid_remove()
+        clear_layout([add_button, view_all_button])
 
 # Handle getting row/s from data frame
 def convert_and_search(context):
@@ -263,12 +248,7 @@ def layout_hide_show(button_id,context):
                 job_status_entry,
             ])
             # Reset values in entries
-            job_name_entry.delete(0, tk.END)
-            job_type_entry.delete(0, tk.END)
-            transport_entry.delete(0, tk.END)
-            job_address_entry.delete(0, tk.END)
-            date_entry.delete(0, tk.END)
-            job_status_entry.delete(0, tk.END)
+            clear_entries([job_name_entry, job_type_entry, transport_entry, job_address_entry, date_entry,job_status_entry])
             search_button.grid(column=2, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
             add_button.config(text='ADD')
@@ -324,7 +304,7 @@ def layout_hide_show(button_id,context):
             search_button.config(text='SEARCH')
             search_button.grid(column=2, row=2, padx=2, pady=2)
             opt.set("SEARCH BY")
-            search_bar.delete(0, tk.END)
+            clear_entries([search_bar])
             add_button.grid(column=1, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
             return None
@@ -352,6 +332,7 @@ def layout_hide_show(button_id,context):
         data_manager = context['data_manager']
         delete_button = context['delete_button']
         back_to_menu_button = context['back_to_menu_button']
+        frm = context['frm']
         data = data_manager.load_data()
         selected_item = tree.focus()
         # Get index of item to be updated
@@ -424,6 +405,7 @@ def layout_hide_show(button_id,context):
                         'search_button': search_button,
                         'delete_button': delete_button,
                         'back_to_menu_button': back_to_menu_button,
+                        'frm' : frm
                 }, index))
             else:
                 # Inform user that nothing was selected
