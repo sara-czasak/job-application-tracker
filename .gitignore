@@ -1,4 +1,6 @@
 v1/job_data.csv
+v2/job_data.csv
 .venv
 .env
 .idea
+practice.py
