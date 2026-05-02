@@ -26,6 +26,7 @@ view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_s
     'search_button': search_button,
     'delete_button': delete_button,
     'back_to_menu_button': back_to_menu_button,
+    'view_stats_button': view_stats_button,
 }))
 view_all_button.grid(column=0, row=2, padx=2, pady=2)
 
@@ -48,6 +49,8 @@ add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_b
     'add_button': add_button,
     'add_job_button': add_job_button,
     'back_to_menu_button': back_to_menu_button,
+    'view_stats_button': view_stats_button,
+    'frm': frm,
 }))
 add_button.grid(column=1, row=2, padx=2, pady=2)
 
@@ -78,6 +81,7 @@ search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show(
     'frm': frm,
     'back_to_menu_button': back_to_menu_button,
     'delete_button': delete_button,
+    'view_stats_button': view_stats_button,
 }))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
@@ -105,6 +109,7 @@ edit_button = ttk.Button(frm, text="EDIT", command=lambda: layout_hide_show('edi
     'delete_button': delete_button,
     'back_to_menu_button' : back_to_menu_button,
     'frm':frm,
+    'view_stats_button': view_stats_button,
 }))
 edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()
@@ -125,9 +130,15 @@ delete_button.grid(column=2, row=2, padx=2, pady=2)
 delete_button.grid_remove()
 
 # Handle changing layout back to home screen
-back_to_menu_button = ttk.Button(frm, text="MENU", command=lambda: back_to_menu(frm, view_all_button, add_button, search_button))
+back_to_menu_button = ttk.Button(frm, text="MENU", command=lambda: back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button))
 back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
 back_to_menu_button.grid_remove()
+
+
+# View statistics button
+view_stats_button = ttk.Button(frm, text="VIEW STATS")
+view_stats_button.grid(column=3, row=2, padx=2, pady=2)
+
 
 # VIEW ALL JOBS UI -> treeview
 tree = ttk.Treeview(frm, columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied',

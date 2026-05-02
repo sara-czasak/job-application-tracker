@@ -3,7 +3,7 @@ from popups import *
 
 
 # Change layout to home screen
-def back_to_menu(frm, view_all_button, add_button, search_button):
+def back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button):
     children = frm.winfo_children()
 
     for i in children:
@@ -11,6 +11,7 @@ def back_to_menu(frm, view_all_button, add_button, search_button):
     view_all_button.grid(column=0, row=2, padx=2, pady=2)
     add_button.grid(column=1, row=2, padx=2, pady=2)
     search_button.grid(column=2, row=2, padx=2, pady=2)
+    view_stats_button.grid(column=3, row=2, padx=2, pady=2)
 
 
 # Handle clearing ui widgets
@@ -176,6 +177,7 @@ def layout_hide_show(button_id,context):
         search_button = context['search_button']
         delete_button = context['delete_button']
         back_to_menu_button = context['back_to_menu_button']
+        view_stats_button = context['view_stats_button']
         data = data_manager.load_data()
         if not tree.winfo_viewable():
             if data.empty:
@@ -184,7 +186,7 @@ def layout_hide_show(button_id,context):
                 return 'No job data added yet'
             else:
                 # Remove unneeded widgets
-                clear_layout([add_button,search_button, view_all_button])
+                clear_layout([add_button,search_button, view_all_button, view_stats_button])
                 rows = data.iterrows()
                 tree.delete(*tree.get_children())
                 # Display treeview with all available data
@@ -220,11 +222,13 @@ def layout_hide_show(button_id,context):
         search_button = context['search_button']
         add_job_button = context['add_job_button']
         back_to_menu_button = context['back_to_menu_button']
+        view_stats_button = context['view_stats_button']
+        frm = context['frm']
 
         # Check if the add ui has been loaded in
         if not job_name_label.winfo_viewable():
             # Clear unneeded widgets
-            clear_layout([view_all_button, search_button, add_button])
+            clear_layout([view_all_button, search_button, add_button, view_stats_button])
             # Set up data entry ui
             job_name_label.grid(column=0, row=3, padx=2, pady=2)
             job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
@@ -261,9 +265,10 @@ def layout_hide_show(button_id,context):
             # Reset values in entries
             clear_entries([job_name_entry, job_type_entry, transport_entry, job_address_entry, date_entry,job_status_entry])
             search_button.grid(column=2, row=2, padx=2, pady=2)
-            view_all_button.grid(column=0, row=2, padx=2, pady=2)
-            add_button.config(text='ADD')
-            add_button.grid(column=1, row=2, padx=2, pady=2)
+            # view_all_button.grid(column=0, row=2, padx=2, pady=2)
+            # add_button.config(text='ADD')
+            # add_button.grid(column=1, row=2, padx=2, pady=2)
+            back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button)
             return None
 
     # SEARCH BUTTON
@@ -281,11 +286,12 @@ def layout_hide_show(button_id,context):
         back_to_menu_button = context['back_to_menu_button']
         delete_button = context['delete_button']
         edit_button = context['edit_button']
+        view_stats_button = context['view_stats_button']
 
         # Check if search ui loaded
         if not search_bar.winfo_viewable():
             # Clear unneeded widgets
-            clear_layout([view_all_button, add_button])
+            clear_layout([view_all_button, add_button, view_stats_button])
             # Set up search ui
             search_bar.grid(column=0, row=3, padx=2, pady=2)
             search_by_options.grid(column=2, row=3, padx=2, pady=2)
@@ -315,10 +321,10 @@ def layout_hide_show(button_id,context):
             # Clear unneeded widgets
             clear_layout([find_button, search_by_options, search_bar])
             search_button.config(text='SEARCH')
-            search_button.grid(column=2, row=2, padx=2, pady=2)
-
-            add_button.grid(column=1, row=2, padx=2, pady=2)
-            view_all_button.grid(column=0, row=2, padx=2, pady=2)
+            back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button)
+            # search_button.grid(column=2, row=2, padx=2, pady=2)
+            # add_button.grid(column=1, row=2, padx=2, pady=2)
+            # view_all_button.grid(column=0, row=2, padx=2, pady=2)
             return None
 
     # EDIT BUTTON
@@ -345,6 +351,7 @@ def layout_hide_show(button_id,context):
         delete_button = context['delete_button']
         back_to_menu_button = context['back_to_menu_button']
         frm = context['frm']
+        view_stats_button = context['view_stats_button']
         data = data_manager.load_data()
         selected_item = tree.focus()
         # Get index of item to be updated
@@ -447,9 +454,10 @@ def layout_hide_show(button_id,context):
             job_address_entry.delete(0, tk.END)
             date_entry.delete(0, tk.END)
             job_status_entry.delete(0, tk.END)
-            search_button.grid(column=2, row=2, padx=2, pady=2)
-            view_all_button.grid(column=0, row=2, padx=2, pady=2)
-            add_button.grid(column=1, row=2, padx=2, pady=2)
+            back_to_menu(frm, view_all_button, add_button, search_button, delete_button)
+            # search_button.grid(column=2, row=2, padx=2, pady=2)
+            # view_all_button.grid(column=0, row=2, padx=2, pady=2)
+            # add_button.grid(column=1, row=2, padx=2, pady=2)
             search_button.config(text='SEARCH')
             view_all_button.config(text='VIEW ALL')
             edit_button.config(text='EDIT')
