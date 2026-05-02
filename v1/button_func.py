@@ -106,25 +106,27 @@ def convert_and_search(context):
     edit_button = context['edit_button']
     delete_button = context['delete_button']
 
+    col = ''
+
     # Convert selected OptionMenu option to accepted value
     if opt.get() == "job name":
-        opt = 'job_name'
+        col = 'job_name'
     elif opt.get() == "date":
-        opt = 'date_applied'
+        col = 'date_applied'
     elif opt.get() == 'type':
-        opt = 'job_type'
+        col = 'job_type'
     elif opt.get() == 'bus/tram stop':
-        opt = 'public_transport'
+        col = 'public_transport'
     elif opt.get() == 'status':
-        opt = 'job_status'
+        col = 'job_status'
     else:
         # Inform user that an option needs to be selected
         feedback('Please select an option from the dropdown menu.')
 
-    if opt != '':
+    if col != '':
         # Search for row/s
         value = search_bar.get()
-        data = data_manager.find_rows(opt, value)
+        data = data_manager.find_rows(col, value)
 
         if data is not None:
             if data.empty:
@@ -144,11 +146,13 @@ def convert_and_search(context):
                 back_to_menu_button.grid(column=0, row=2, padx=2, pady=2)
                 edit_button.grid(column=1, row=2, padx=2, pady=2)
                 delete_button.grid(column=2, row=2, padx=2, pady=2)
-
+                opt.set("SEARCH BY")
+                clear_entries([search_bar])
                 return None
         else:
             return None
-    return None
+    else:
+        return None
 
 
 
@@ -280,6 +284,8 @@ def layout_hide_show(button_id,context):
             search_by_options.grid(column=2, row=3, padx=2, pady=2)
             back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
             find_button.grid(column=2, row=2, padx=2, pady=2)
+            opt.set("SEARCH BY")
+            clear_entries([search_bar])
 
             # Search for query value
             find_button.config(command=lambda: convert_and_search({
@@ -303,8 +309,7 @@ def layout_hide_show(button_id,context):
             clear_layout([find_button, search_by_options, search_bar])
             search_button.config(text='SEARCH')
             search_button.grid(column=2, row=2, padx=2, pady=2)
-            opt.set("SEARCH BY")
-            clear_entries([search_bar])
+
             add_button.grid(column=1, row=2, padx=2, pady=2)
             view_all_button.grid(column=0, row=2, padx=2, pady=2)
             return None
