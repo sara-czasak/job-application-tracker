@@ -9,7 +9,7 @@ class DataManager:
 
     def load_data(self):
         try:
-            data = pd.read_csv('job_data.csv')
+            data = pd.read_csv('./job_data.csv')
             return data
         except FileNotFoundError:
             df = pd.DataFrame(columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied', 'job_status'])

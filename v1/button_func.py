@@ -1,4 +1,5 @@
 import tkinter as tk
+from popups import *
 
 
 def back_to_menu(frm, view_all_button, add_button, search_button):
@@ -102,7 +103,7 @@ def convert_and_search(context):
     elif opt.get() == 'status':
         opt = 'job_status'
     else:
-        opt = ''
+        feedback('Please select an option from the dropdown menu.')
 
     rows = ''
 
@@ -111,6 +112,7 @@ def convert_and_search(context):
 
         if data is not None:
             if data.empty:
+                feedback('No entries found.')
                 return 'No data found'
             else:
                 clear_layout([search_bar, search_by, find_button, search_button, add_button])
@@ -121,7 +123,8 @@ def convert_and_search(context):
                 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
                 back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
                 return None
-        return None
+        else:
+            return None
     return None
 
 
@@ -142,6 +145,7 @@ def layout_hide_show(button_id,context):
         data = data_manager.load_data()
         if not tree.winfo_viewable():
             if data.empty:
+                feedback('No data found. Please add a job then try again.')
                 return 'No job data added yet'
             else:
                 clear_layout([add_button,search_button, view_all_button])
@@ -362,7 +366,8 @@ def layout_hide_show(button_id,context):
                         'delete_button': delete_button,
                         'back_to_menu_button': back_to_menu_button,
                 }, index))
-
+            else:
+                feedback('Please select a job to edit.')
         else:
             clear_layout([
                 job_name_label,
@@ -421,4 +426,6 @@ def delete_job(tree, data_manager):
             for row in rows:
                 tree.insert('', tk.END, values=list(row[1].values))
             tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
+    else:
+        feedback('Please select a job to delete.')
     return None
