@@ -476,20 +476,22 @@ def layout_hide_show(button_id,context):
         jobs_per_status_button = context['jobs_per_status_button']
         jobs_per_type_button = context['jobs_per_type_button']
         jobs_per_date_button = context['jobs_per_date_button']
+        apps_sent_last_week_button = context['apps_sent_last_week_button']
         frm = context['frm']
 
         clear_layout([add_button, search_button, view_all_button, view_stats_button])
         back_to_menu_button.grid(column=0, row=0, padx=2, pady=2)
 
 
-        # REMEMBER STATS BUTTONS MUST PASS IN FRM!!!
-        average_per_day_button.grid(column=0, row=1, padx=2, pady=2)
+        average_per_day_button.grid(column=1, row=0, padx=2, pady=2)
 
-        jobs_per_status_button.grid(column=1, row=1, padx=2, pady=2)
+        jobs_per_status_button.grid(column=0, row=1, padx=2, pady=2)
 
-        jobs_per_type_button.grid(column=2, row=1, padx=2, pady=2)
+        jobs_per_type_button.grid(column=1, row=1, padx=2, pady=2)
 
         jobs_per_date_button.grid(column=0, row=2, padx=2, pady=2)
+
+        apps_sent_last_week_button.grid(column=1, row=2, padx=2, pady=2)
 
         return None
 

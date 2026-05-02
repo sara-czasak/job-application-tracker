@@ -228,6 +228,7 @@ view_stats_button = ttk.Button(frm, text="VIEW STATS", command=lambda: layout_hi
     'jobs_per_status_button': jobs_per_status_button,
     'jobs_per_type_button': jobs_per_type_button,
     'jobs_per_date_button': jobs_per_date_button,
+    'apps_sent_last_week_button': apps_sent_last_week_button,
     'frm': frm,
 
 }))
@@ -264,6 +265,13 @@ jobs_per_date_button = ttk.Button(frm, text='JOBS PER DATE', command=lambda: sho
 }))
 jobs_per_date_button.grid(column=1, row=3, padx=2, pady=2)
 jobs_per_date_button.grid_remove()
+
+
+apps_sent_last_week_button = ttk.Button(frm, text='APPLICATIONS IN PAST WEEK', command=lambda: show_statistics('apps_sent_last_week_button',{
+    'frm': frm,
+}))
+apps_sent_last_week_button.grid(column=1, row=3, padx=2, pady=2)
+apps_sent_last_week_button.grid_remove()
 
 
 
