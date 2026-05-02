@@ -16,3 +16,11 @@ def check_if_info_correct(info):
     else:
         return False
 
+
+def are_you_sure():
+    check = tk.messagebox.askquestion("Are you sure?", "Please duble check you want to proceed")
+    if check == "yes":
+        return True
+    else:
+        return False
+

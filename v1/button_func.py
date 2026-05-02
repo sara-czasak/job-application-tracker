@@ -15,6 +15,27 @@ def clear_layout(items):
         i.grid_remove()
 
 
+def delete_job(tree, data_manager):
+    data = data_manager.load_data()
+    item_to_delete = tree.focus()
+    index = int(tree.index(item_to_delete))
+    if item_to_delete:
+        if are_you_sure():
+            new_data = data_manager.delete_row(index)
+            if new_data.empty:
+                return 'No job data added yet'
+            else:
+                rows = new_data.iterrows()
+                tree.delete(*tree.get_children())
+                for row in rows:
+                    tree.insert('', tk.END, values=list(row[1].values))
+                tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
+    else:
+        feedback('Please select a job to delete.')
+    return None
+
+
+
 def save_changes_func(context, index):
     update_button = context['update_button']
     job_name = context['job_name']
@@ -303,7 +324,7 @@ def layout_hide_show(button_id,context):
         selected_item = tree.focus()
         # Get index of item to be updated
         index = int(tree.index(selected_item))
-        job_to_edit = {}
+
         if not job_name_label.winfo_viewable():
             if selected_item:
 
@@ -415,20 +436,3 @@ def layout_hide_show(button_id,context):
         return None
 
 
-def delete_job(tree, data_manager):
-    data = data_manager.load_data()
-    item_to_delete = tree.focus()
-    index = int(tree.index(item_to_delete))
-    if item_to_delete:
-        new_data = data_manager.delete_row(index)
-        if new_data.empty:
-            return 'No job data added yet'
-        else:
-            rows = new_data.iterrows()
-            tree.delete(*tree.get_children())
-            for row in rows:
-                tree.insert('', tk.END, values=list(row[1].values))
-            tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
-    else:
-        feedback('Please select a job to delete.')
-    return None

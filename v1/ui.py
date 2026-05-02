@@ -4,10 +4,11 @@ from data_manager import *
 from button_func import *
 
 
+# Load in pandas data frame
 data_manager = DataManager()
 data = data_manager.data
 
-
+# Set up window and frame
 root = Tk()
 root.minsize(250,70)
 root.title("JOB HUNT HELPER")
@@ -15,6 +16,7 @@ frm = ttk.Frame(root, padding=10)
 frm.grid()
 
 
+# Handle showing data in treeview
 view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all',{
     'tree': tree,
     'view_all_button': view_all_button,
@@ -27,6 +29,7 @@ view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_s
 }))
 view_all_button.grid(column=0, row=2, padx=2, pady=2)
 
+# Handle changing layout to add screen
 add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_button',{
     'job_name_label': job_name_label,
     'job_name_entry': job_name_entry,
@@ -48,6 +51,7 @@ add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_b
 }))
 add_button.grid(column=1, row=2, padx=2, pady=2)
 
+# Handle adding new row to data frame
 add_job_button = ttk.Button(frm, text='SAVE', command=lambda: data_manager.save_new_job({
     'job_name': job_name_entry,
     'job_type': job_type_entry,
@@ -56,10 +60,10 @@ add_job_button = ttk.Button(frm, text='SAVE', command=lambda: data_manager.save_
     'date': date_entry,
     'job_status': job_status_entry,
 }))
-
 add_job_button.grid(column=2, row=2, padx=2, pady=2)
 add_job_button.grid_remove()
 
+# Handle changing layout to search screen
 search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show('search_button',{
     'view_all_button': view_all_button,
     'add_button': add_button,
@@ -76,6 +80,7 @@ search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show(
 }))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
+# Handle changing layout to edit screen
 edit_button = ttk.Button(frm, text="EDIT", command=lambda: layout_hide_show('edit_button',{
     'tree': tree,
     'job_name_label': job_name_label,
@@ -102,27 +107,27 @@ edit_button = ttk.Button(frm, text="EDIT", command=lambda: layout_hide_show('edi
 edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()
 
-
+# Handle finding row/s in data frame
 find_button = ttk.Button(frm, text="FIND")
 find_button.grid(column=2, row=2, padx=2, pady=2)
 find_button.grid_remove()
 
-
+# Handle saving updated row to data frame
 update_button = ttk.Button(frm, text="SAVE CHANGES")
 update_button.grid(column=2, row=2, padx=2, pady=2)
 update_button.grid_remove()
 
-
+# Handle removing item from data frame
 delete_button = ttk.Button(frm, text="DELETE", command=lambda: delete_job(tree, data_manager))
 delete_button.grid(column=2, row=2, padx=2, pady=2)
 delete_button.grid_remove()
 
-
+# Handle changing layout back to home screen
 back_to_menu_button = ttk.Button(frm, text="MENU", command=lambda: back_to_menu(frm, view_all_button, add_button, search_button))
 back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
 back_to_menu_button.grid_remove()
 
-# DISPLAY ALL JOBS
+# VIEW ALL JOBS UI -> treeview
 tree = ttk.Treeview(frm, columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied',
                                           'job_status'], show='headings')
 tree.heading('job_name', text='Job Name')
@@ -141,7 +146,7 @@ tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
 tree.grid_remove()
 
 
-# ADD LAYOUT ELEMENTS
+# ADD/EDIT UI -> labels and entries
 job_name_label = ttk.Label(frm, text="Job Name:", anchor='e')
 job_name_label.grid(column=0, row=3, padx=2, pady=2)
 job_name_label.grid_remove()
@@ -185,7 +190,7 @@ job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
 job_status_entry.grid_remove()
 
 
-# SEARCH UI
+# SEARCH UI -> entry and option menu
 search_bar = ttk.Entry(frm, width=25)
 search_bar.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
 search_bar.grid_remove()
