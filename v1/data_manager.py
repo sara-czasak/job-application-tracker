@@ -47,7 +47,8 @@ class DataManager:
                 return False
             else:
                 col_names = self.data.columns.values.tolist()
-
+                print(col_names[0], col_names[1], col_names[2], col_names[3], col_names[4], col_names[5])
+                print(job_to_edit['job_name'].get(), job_to_edit['job_type'].get(), job_to_edit['transport'].get(), job_to_edit['job_address'].get(), job_to_edit['date'].get(), job_to_edit['job_status'].get())
                 # Add new data to data frame
                 self.data.at[index, col_names[0]] = job_to_edit['job_name'].get()
                 self.data.at[index, col_names[1]] = job_to_edit['job_type'].get()
@@ -76,6 +77,7 @@ class DataManager:
                 'date': job['date'].get(),
                 'job_status': job['job_status'].get()
             }
+            print(data_dict)
             # Ask user if entered information is correct
             if check_if_info_correct(data_dict):
                 return True

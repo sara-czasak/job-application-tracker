@@ -370,26 +370,32 @@ def layout_hide_show(button_id,context):
                 # Set up edit ui
                 job_name_label.grid(column=0, row=3, padx=2, pady=2)
                 job_name_entry.grid(column=1, row=3, padx=2, pady=2, columnspan=2)
+                job_name_entry.delete(0, tk.END)
                 job_name_entry.insert(tk.END, job_to_edit['job_name'])
 
                 job_type_label.grid(column=0, row=4, padx=2, pady=2)
                 job_type_entry.grid(column=1, row=4, padx=2, pady=2, columnspan=2)
+                job_type_entry.delete(0, tk.END)
                 job_type_entry.insert(tk.END, job_to_edit['job_type'])
 
                 transport_label.grid(column=0, row=5, padx=2, pady=2)
                 transport_entry.grid(column=1, row=5, padx=2, pady=2, columnspan=2)
+                transport_entry.delete(0, tk.END)
                 transport_entry.insert(tk.END, job_to_edit['public_transport'])
 
                 job_address_label.grid(column=0, row=6, padx=2, pady=2)
                 job_address_entry.grid(column=1, row=6, padx=2, pady=2, columnspan=2)
+                job_address_entry.delete(0, tk.END)
                 job_address_entry.insert(tk.END, job_to_edit['job_address'])
 
                 date_label.grid(column=0, row=7, padx=2, pady=2)
                 date_entry.grid(column=1, row=7, padx=2, pady=2, columnspan=2)
+                date_entry.delete(0, tk.END)
                 date_entry.insert(tk.END, job_to_edit['date_applied'])
 
                 job_status_label.grid(column=0, row=8, padx=2, pady=2)
                 job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
+                job_status_entry.delete(0, tk.END)
                 job_status_entry.insert(tk.END, job_to_edit['job_status'])
 
 

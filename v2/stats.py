@@ -24,15 +24,13 @@ class Statistics(DataManager):
 
 
     def find_data(self, value):
-        data = self.data[self.data[value]]
-        return data
+        return self.data[self.data['date_applied'] == value]
 
 
     def apps_in_last_week(self):
         now = dt.datetime.now()
 
         dates = [(now - dt.timedelta(x)).strftime("%d-%m-%Y") for x in range(7)]
-        print(dates)
         total_apps = 0
         for date in dates:
             try:

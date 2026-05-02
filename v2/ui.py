@@ -1,17 +1,15 @@
 from tkinter import *
 from tkinter import ttk
 
-from numpy.ma.extras import average
 
-# from data_manager import *
+from data_manager import *
 from button_func import *
-from stats import *
+from stats_ui import *
 
 
 # Load in pandas data frame
 data_manager = DataManager()
 data = data_manager.data
-stats = Statistics()
 
 # Set up window and frame
 root = Tk()
@@ -140,20 +138,7 @@ back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
 back_to_menu_button.grid_remove()
 
 
-# WORKING ON THIS:
-# View statistics button
-view_stats_button = ttk.Button(frm, text="VIEW STATS", command=lambda: layout_hide_show('view_stats_button',{
-    'stats': stats,
-    'add_button': add_button,
-    'search_button': search_button,
-    'view_all_button': view_all_button,
-    'view_stats_button': view_stats_button,
-    'back_to_menu_button': back_to_menu_button,
-    'average_apps_per_day_label': average_apps_per_day_label,
-    'average_apps_per_day_stat': average_apps_per_day_stat,
-    'average_per_day_button': average_per_day_button,
-}))
-view_stats_button.grid(column=3, row=2, padx=2, pady=2)
+
 
 
 # VIEW ALL JOBS UI -> treeview
@@ -231,17 +216,54 @@ search_by_options.grid(column=1, row=3, padx=2, pady=2)
 search_by_options.grid_remove()
 
 
+# WORKING ON THIS:
+# View statistics button
+view_stats_button = ttk.Button(frm, text="VIEW STATS", command=lambda: layout_hide_show('view_stats_button',{
+    'add_button': add_button,
+    'search_button': search_button,
+    'view_all_button': view_all_button,
+    'view_stats_button': view_stats_button,
+    'back_to_menu_button': back_to_menu_button,
+    'average_per_day_button': average_per_day_button,
+    'jobs_per_status_button': jobs_per_status_button,
+    'jobs_per_type_button': jobs_per_type_button,
+    'jobs_per_date_button': jobs_per_date_button,
+    'frm': frm,
+
+}))
+view_stats_button.grid(column=3, row=2, padx=2, pady=2)
+
+
 # Widgets for view stats
-# Average per day
-average_apps_per_day_label = ttk.Label(frm, text="Average Apps per Day:", anchor='e')
-average_apps_per_day_label.grid(column=1, row=0, padx=2, pady=2)
-average_apps_per_day_label.grid_remove()
-average_apps_per_day_stat = ttk.Label(frm, text="", anchor='e')
-average_apps_per_day_stat.grid(column=1, row=1, padx=2, pady=2)
-average_apps_per_day_stat.grid_remove()
-average_per_day_button = ttk.Button(frm, text='SEE MORE DETAILS')
+
+
+
+average_per_day_button = ttk.Button(frm, text='AVERAGE APPS PER DAY', command=lambda: show_statistics('average_per_day_button',{
+    'frm': frm,
+}))
 average_per_day_button.grid(column=1, row=2, padx=2, pady=2)
 average_per_day_button.grid_remove()
+
+
+jobs_per_status_button = ttk.Button(frm, text='JOBS PER STATUS', command=lambda: show_statistics('jobs_per_status_button',{
+    'frm': frm,
+}))
+jobs_per_status_button.grid(column=1, row=3, padx=2, pady=2)
+jobs_per_status_button.grid_remove()
+
+
+jobs_per_type_button = ttk.Button(frm, text='JOBS PER TYPE', command=lambda: show_statistics('jobs_per_type_button',{
+    'frm': frm,
+}))
+jobs_per_type_button.grid(column=1, row=3, padx=2, pady=2)
+jobs_per_type_button.grid_remove()
+
+
+jobs_per_date_button = ttk.Button(frm, text='JOBS PER DATE', command=lambda: show_statistics('jobs_per_date_button',{
+    'frm': frm,
+}))
+jobs_per_date_button.grid(column=1, row=3, padx=2, pady=2)
+jobs_per_date_button.grid_remove()
 
 
 
