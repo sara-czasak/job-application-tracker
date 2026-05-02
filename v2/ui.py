@@ -1,12 +1,17 @@
 from tkinter import *
 from tkinter import ttk
-from data_manager import *
+
+from numpy.ma.extras import average
+
+# from data_manager import *
 from button_func import *
+from stats import *
 
 
 # Load in pandas data frame
 data_manager = DataManager()
 data = data_manager.data
+stats = Statistics()
 
 # Set up window and frame
 root = Tk()
@@ -138,11 +143,15 @@ back_to_menu_button.grid_remove()
 # WORKING ON THIS:
 # View statistics button
 view_stats_button = ttk.Button(frm, text="VIEW STATS", command=lambda: layout_hide_show('view_stats_button',{
+    'stats': stats,
     'add_button': add_button,
     'search_button': search_button,
     'view_all_button': view_all_button,
     'view_stats_button': view_stats_button,
     'back_to_menu_button': back_to_menu_button,
+    'average_apps_per_day_label': average_apps_per_day_label,
+    'average_apps_per_day_stat': average_apps_per_day_stat,
+    'average_per_day_button': average_per_day_button,
 }))
 view_stats_button.grid(column=3, row=2, padx=2, pady=2)
 
@@ -220,6 +229,20 @@ opt = StringVar(value="SEARCH BY")
 search_by_options = OptionMenu(frm, opt, *search_by)
 search_by_options.grid(column=1, row=3, padx=2, pady=2)
 search_by_options.grid_remove()
+
+
+# Widgets for view stats
+# Average per day
+average_apps_per_day_label = ttk.Label(frm, text="Average Apps per Day:", anchor='e')
+average_apps_per_day_label.grid(column=1, row=0, padx=2, pady=2)
+average_apps_per_day_label.grid_remove()
+average_apps_per_day_stat = ttk.Label(frm, text="", anchor='e')
+average_apps_per_day_stat.grid(column=1, row=1, padx=2, pady=2)
+average_apps_per_day_stat.grid_remove()
+average_per_day_button = ttk.Button(frm, text='SEE MORE DETAILS')
+average_per_day_button.grid(column=1, row=2, padx=2, pady=2)
+average_per_day_button.grid_remove()
+
 
 
 root.mainloop()

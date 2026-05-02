@@ -466,13 +466,22 @@ def layout_hide_show(button_id,context):
             data_manager.delete_row(index)
         return None
     elif button_id == 'view_stats_button':
+        stats = context['stats']
         add_button = context['add_button']
         search_button = context['search_button']
         view_all_button = context['view_all_button']
-        view_status_button = context['view_status_button']
+        view_stats_button = context['view_stats_button']
         back_to_menu_button = context['back_to_menu_button']
+        average_apps_per_day_label = context['average_apps_per_day_label']
+        average_apps_per_day_stat = context['average_apps_per_day_stat']
+        average_per_day_button = context['average_per_day_button']
 
-        clear_layout([add_button, search_button, view_all_button, view_status_button])
+        clear_layout([add_button, search_button, view_all_button, view_stats_button])
+        back_to_menu_button.grid(column=0, row=0, padx=2, pady=2)
+        average_apps_per_day_label.grid(column=0, row=1, padx=2, pady=2)
+        average_apps_per_day_stat.grid(column=1, row=1, padx=2, pady=2)
+        average_apps_per_day_stat.config(text=stats.apps_per_day())
+        average_per_day_button.grid(column=2, row=1, padx=2, pady=2)
         return None
 
     else:
