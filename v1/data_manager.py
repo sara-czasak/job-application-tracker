@@ -45,7 +45,6 @@ class DataManager:
                 return False
             else:
                 col_names = self.data.columns.values.tolist()
-                print(index)
 
 
                 self.data.at[index, col_names[0]] = job_to_edit['job_name'].get()
@@ -95,5 +94,6 @@ class DataManager:
             print('Nothing to delete')
             return None
         self.data = self.data.drop(index)
+        self.data = self.data.reset_index(drop=True)
         self.data.to_csv('job_data.csv', index=False)
         return self.data
