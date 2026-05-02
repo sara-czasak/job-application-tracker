@@ -1,5 +1,6 @@
 import pandas as pd
 import tkinter as tk
+from popups import *
 
 
 class DataManager:
@@ -61,9 +62,22 @@ class DataManager:
 
 
     def check_if_data(self, job):
-        if job['job_name'].get() != '' and job['job_type'].get() != '' and job['transport'].get() != '' and job['job_address'].get() != '' and job['date'].get() != '' and job['job_status'].get() != '':
-            return True
+        #and job['transport'].get() != ''
+        if job['job_name'].get() != '' and job['job_type'].get() != '' and job['job_address'].get() != '' and job['date'].get() != '' and job['job_status'].get() != '':
+            data_dict = {
+                'job_name': job['job_name'].get(),
+                'job_type': job['job_type'].get(),
+                'transport': job['transport'].get(),
+                'job_address': job['job_address'].get(),
+                'date': job['date'].get(),
+                'job_status': job['job_status'].get()
+            }
+            if check_if_info_correct(data_dict):
+                return True
+            else:
+                return False
         else:
+            feedback('Only Tram/Bus stop field can be left empty.')
             return False
 
 

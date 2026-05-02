@@ -37,14 +37,16 @@ def save_changes_func(context, index):
     delete_button = context['delete_button']
     back_to_menu_button = context['back_to_menu_button']
 
-    updated = data_manager.update_job({
+    data_dict = {
         'job_name': job_name,
         'job_type': job_type,
         'transport': transport,
         'job_address': job_address,
         'date': date,
         'job_status': job_status,
-    }, index)
+    }
+
+    updated = data_manager.update_job(data_dict, index)
     if updated:
         clear_layout([
             job_name_label,
@@ -198,6 +200,7 @@ def layout_hide_show(button_id,context):
             job_status_label.grid(column=0, row=8, padx=2, pady=2)
             job_status_entry.grid(column=1, row=8, padx=2, pady=2, columnspan=2)
             back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
+
             add_job_button.grid(column=2, row=2, padx=2, pady=2)
             return None
         else:
