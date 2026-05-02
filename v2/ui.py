@@ -135,8 +135,15 @@ back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
 back_to_menu_button.grid_remove()
 
 
+# WORKING ON THIS:
 # View statistics button
-view_stats_button = ttk.Button(frm, text="VIEW STATS")
+view_stats_button = ttk.Button(frm, text="VIEW STATS", command=lambda: layout_hide_show('view_stats_button',{
+    'add_button': add_button,
+    'search_button': search_button,
+    'view_all_button': view_all_button,
+    'view_stats_button': view_stats_button,
+    'back_to_menu_button': back_to_menu_button,
+}))
 view_stats_button.grid(column=3, row=2, padx=2, pady=2)
 
 

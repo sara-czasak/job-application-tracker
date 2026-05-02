@@ -265,9 +265,6 @@ def layout_hide_show(button_id,context):
             # Reset values in entries
             clear_entries([job_name_entry, job_type_entry, transport_entry, job_address_entry, date_entry,job_status_entry])
             search_button.grid(column=2, row=2, padx=2, pady=2)
-            # view_all_button.grid(column=0, row=2, padx=2, pady=2)
-            # add_button.config(text='ADD')
-            # add_button.grid(column=1, row=2, padx=2, pady=2)
             back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button)
             return None
 
@@ -322,9 +319,6 @@ def layout_hide_show(button_id,context):
             clear_layout([find_button, search_by_options, search_bar])
             search_button.config(text='SEARCH')
             back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button)
-            # search_button.grid(column=2, row=2, padx=2, pady=2)
-            # add_button.grid(column=1, row=2, padx=2, pady=2)
-            # view_all_button.grid(column=0, row=2, padx=2, pady=2)
             return None
 
     # EDIT BUTTON
@@ -455,9 +449,6 @@ def layout_hide_show(button_id,context):
             date_entry.delete(0, tk.END)
             job_status_entry.delete(0, tk.END)
             back_to_menu(frm, view_all_button, add_button, search_button, delete_button)
-            # search_button.grid(column=2, row=2, padx=2, pady=2)
-            # view_all_button.grid(column=0, row=2, padx=2, pady=2)
-            # add_button.grid(column=1, row=2, padx=2, pady=2)
             search_button.config(text='SEARCH')
             view_all_button.config(text='VIEW ALL')
             edit_button.config(text='EDIT')
@@ -474,6 +465,16 @@ def layout_hide_show(button_id,context):
             # Handle removing row from dataframe
             data_manager.delete_row(index)
         return None
+    elif button_id == 'view_stats_button':
+        add_button = context['add_button']
+        search_button = context['search_button']
+        view_all_button = context['view_all_button']
+        view_status_button = context['view_status_button']
+        back_to_menu_button = context['back_to_menu_button']
+
+        clear_layout([add_button, search_button, view_all_button, view_status_button])
+        return None
+
     else:
         return None
 
