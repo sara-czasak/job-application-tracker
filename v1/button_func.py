@@ -19,6 +19,7 @@ def clear_layout(items):
         i.grid_remove()
 
 
+# Reset entry values
 def clear_entries(entries):
     for entry in entries:
         entry.delete(0, tk.END)
@@ -28,7 +29,6 @@ def adding_entry_and_cleanup(data_dict, data_manager):
     if data_manager.save_new_job(data_dict):
         to_clean = [i for i in data_dict.values()]
         clear_entries(to_clean)
-
 
 
 # Handle entry deletion
