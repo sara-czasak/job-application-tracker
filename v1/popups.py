@@ -2,11 +2,13 @@ import tkinter as tk
 from tkinter import messagebox
 
 
+# Handle user error feedback
 def feedback(message):
     popup = tk.messagebox.showwarning(title="Error", message=message)
     return popup
 
 
+# Check if entries are correct
 def check_if_info_correct(info):
     check = messagebox.askquestion(
         title="Check if everything is correct",
@@ -17,6 +19,7 @@ def check_if_info_correct(info):
         return False
 
 
+# Check if user is sure they want to proceed
 def are_you_sure():
     check = tk.messagebox.askquestion("Are you sure?", "Please duble check you want to proceed")
     if check == "yes":

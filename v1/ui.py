@@ -77,6 +77,7 @@ search_button = ttk.Button(frm, text="SEARCH", command=lambda: layout_hide_show(
     'edit_button': edit_button,
     'frm': frm,
     'back_to_menu_button': back_to_menu_button,
+    'delete_button': delete_button,
 }))
 search_button.grid(column=2, row=2, padx=2, pady=2)
 
