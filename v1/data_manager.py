@@ -33,14 +33,9 @@ class DataManager:
             self.data = pd.concat([self.data, new_job], ignore_index=True)
             # Save updated data
             self.data.to_csv('job_data.csv', index=False)
-
-            # MOVE THIS TO BUTTON FUNCTIONS !!!
-            new_job_data['job_name'].delete(0, tk.END)
-            new_job_data['job_type'].delete(0, tk.END)
-            new_job_data['transport'].delete(0, tk.END)
-            new_job_data['job_address'].delete(0, tk.END)
-            new_job_data['date'].delete(0, tk.END)
-            new_job_data['job_status'].delete(0, tk.END)
+            return True
+        else:
+            return False
 
 
     # Update data frame

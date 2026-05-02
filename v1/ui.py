@@ -52,14 +52,14 @@ add_button = ttk.Button(frm, text="ADD", command=lambda: layout_hide_show('add_b
 add_button.grid(column=1, row=2, padx=2, pady=2)
 
 # Handle adding new row to data frame
-add_job_button = ttk.Button(frm, text='SAVE', command=lambda: data_manager.save_new_job({
+add_job_button = ttk.Button(frm, text='SAVE', command=lambda: adding_entry_and_cleanup({
     'job_name': job_name_entry,
     'job_type': job_type_entry,
     'transport': transport_entry,
     'job_address': job_address_entry,
     'date': date_entry,
     'job_status': job_status_entry,
-}))
+}, data_manager))
 add_job_button.grid(column=2, row=2, padx=2, pady=2)
 add_job_button.grid_remove()
 
