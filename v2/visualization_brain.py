@@ -30,6 +30,7 @@ def apps_per_cat_chart(data, cats, jobs_per):
 
     fig, ax = plt.subplots(figsize=(4, 4))
 
+
     ax.bar(cats, apps)
     ax.set_title(f'Jobs per {jobs_per}')
     ax.set_xlabel('Categories')
@@ -37,10 +38,12 @@ def apps_per_cat_chart(data, cats, jobs_per):
     return fig
 
 
+def clear_graph(canvas):
+    for item in canvas.get_tk_widget().find_all():
+        canvas.get_tk_widget().delete(item)
+
+
 
 if __name__ == '__main__':
     stats = Statistics()
-    # data = stats.apps_per_day_last_week()
-    data_dict, cat = stats.jobs_per('date_applied')
-    # print(data_dict)
-    apps_per_cat(data_dict, cat, 'date')
+

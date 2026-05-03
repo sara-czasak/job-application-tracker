@@ -1,6 +1,3 @@
-from tkinter import *
-from tkinter import ttk
-from stats import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from visualization_brain import *
 
@@ -19,6 +16,9 @@ def clean_up(frm):
     for i in children:
         if isinstance(i, ttk.Button):
             pass
+        elif isinstance(i, FigureCanvasTkAgg):
+            plt.close(i.figure)
+            i.get_tk_widget().destroy()
         else:
             i.grid_remove()
 
@@ -27,20 +27,23 @@ def percentage_calculator(total, part):
     return f'{((part / total) * 100):.2f}%'
 
 
-def show_hide_chart(frm, row_count, button, jobs, category, text):
-    fig = apps_per_cat_chart(jobs, category, text)
+def create_destroy_chart(*func_params, frm, func, button, row):
+    for child in frm.winfo_children():
+        if isinstance(child, tkinter.Canvas):
+            child.destroy()
+            button.config(text="SHOW CHART")
+            return
+
+    fig = func(*func_params)
     canvas = FigureCanvasTkAgg(fig, master=frm)
     canvas.draw()
-    for item in canvas.get_tk_widget().find_all():
-        canvas.get_tk_widget().delete(item)
-        button.config(text="SHOW CHART")
-    else:
-        canvas.get_tk_widget().grid(column=0, row=row_count + 1, padx=2, pady=2, columnspan=3)
-        button.config(text="HIDE CHART")
+    canvas.get_tk_widget().grid(column=0, row=row, padx=2, pady=2, columnspan=3)
+    button.config(text="HIDE CHART")
 
 
 def show_statistics(button_id, context):
-    total_rows = len(stats.load_data())
+    stats.data = stats.load_data()
+    total_rows = len(stats.data)
 
     if button_id == 'average_per_day_button':
         frm = context['frm']
@@ -62,14 +65,17 @@ def show_statistics(button_id, context):
         jobs_per_status_label = label_maker("Jobs per Status:", frm)
         jobs_per_status_label.grid(column=0, row=5, padx=2, pady=2)
         jobs, category = stats.jobs_per('job_status')
-        row_count = 7
+        row_num = 7
         for index, cat in enumerate(category):
             per_status = len(jobs[cat])
             label_maker(f'{cat}:\n\tAmount: {per_status}\n\tPercent: {percentage_calculator(total_rows, per_status)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
-            row_count += index
+            row_num += index
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
-        chart_button.config(command=lambda: show_hide_chart(frm, row_count, chart_button, jobs, category, "job status"))
+        chart_button.config(
+            command=lambda: create_destroy_chart(jobs, category, 'status', frm=frm, func=apps_per_cat_chart,
+                                                 button=chart_button,
+                                                 row=row_num + 1))
         return None
 
     elif button_id == 'jobs_per_type_button':
@@ -81,14 +87,17 @@ def show_statistics(button_id, context):
         jobs_per_type_label = label_maker("Jobs per Type:", frm)
         jobs_per_type_label.grid(column=0, row=5, padx=2, pady=2)
         jobs, category = stats.jobs_per('job_type')
-        row_count = 6
+        row_num = 6
         for index, cat in enumerate(category):
             per_type = len(jobs[cat])
             label_maker(f'{cat}:\n\tAmount: {per_type}\n\tPercent: {percentage_calculator(total_rows, per_type)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
-            row_count += index
+            row_num += index
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
-        chart_button.config(command=lambda: show_hide_chart(frm, row_count, chart_button, jobs, category, "job type"))
+        chart_button.config(
+            command=lambda: create_destroy_chart(jobs, category, 'type', frm=frm, func=apps_per_cat_chart,
+                                                 button=chart_button,
+                                                 row=row_num + 1))
 
         return None
 
@@ -101,14 +110,17 @@ def show_statistics(button_id, context):
         jobs_per_type_label = label_maker("Jobs per Date:", frm)
         jobs_per_type_label.grid(column=0, row=5, padx=2, pady=2)
         jobs, category = stats.jobs_per('date_applied')
-        row_count = 6
+        row_num = 6
         for index, cat in enumerate(category):
             per_date = len(jobs[cat])
             label_maker(f'{cat}:\n\tAmount: {per_date}\n\tPercent: {percentage_calculator(total_rows, per_date)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
-            row_count += index
+            row_num += index
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
-        chart_button.config(command=lambda: show_hide_chart(frm, row_count, chart_button, jobs, category, "date"))
+        chart_button.config(
+            command=lambda: create_destroy_chart(jobs, category, 'date', frm=frm, func=apps_per_cat_chart, button=chart_button,
+                                                 row=row_num+1))
+
         return None
 
 
@@ -124,12 +136,11 @@ def show_statistics(button_id, context):
         apps_last_week_stat = label_maker(f'Amount: {week}\nPercent: {percentage_calculator(total_rows, week)}', frm)
         apps_last_week_stat.grid(column=1, row=5, padx=2, pady=2)
 
-        # # Chart
-        # data = stats.apps_per_day_last_week()
-        # fig = apps_per_day_last_week_chart(data)
-        # canvas = FigureCanvasTkAgg(fig, master=frm)
-        # canvas.draw()
-        # canvas.get_tk_widget().grid(column=0, row=6, padx=2, pady=2, columnspan=3)
+        data = stats.apps_per_day_last_week()
+        chart_button.grid(column=0, row=6, padx=2, pady=2)
+
+        chart_button.config(command=lambda: create_destroy_chart(data, frm=frm, func=apps_per_day_last_week_chart, button=chart_button, row=7))
+
         return None
 
     return None
