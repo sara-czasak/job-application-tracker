@@ -1,6 +1,7 @@
 import pandas as pd
 import tkinter as tk
 from popups import *
+from datetime import datetime
 
 
 class DataManager:
@@ -76,10 +77,14 @@ class DataManager:
                 'date': job['date'].get(),
                 'job_status': job['job_status'].get()
             }
-            # Ask user if entered information is correct
-            if check_if_info_correct(data_dict):
-                return True
+            if self.check_if_date(data_dict['date']):
+                # Ask user if entered information is correct
+                if check_if_info_correct(data_dict):
+                    return True
+                else:
+                    return False
             else:
+                feedback('Please enter date in DD-MM-YYYY format.')
                 return False
         else:
             # Inform user that they need to fill out all but one field
@@ -113,3 +118,13 @@ class DataManager:
         self.data = self.data.reset_index(drop=True)
         self.data.to_csv('job_data.csv', index=False)
         return self.data
+
+
+    def check_if_date(self, date):
+        date_format = "%d-%m-%Y"
+        try:
+            res = bool(datetime.strptime(date, date_format))
+            return res
+        except ValueError:
+            res = False
+            return res

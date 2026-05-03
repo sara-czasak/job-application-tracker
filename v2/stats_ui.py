@@ -1,7 +1,7 @@
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from visualization_brain import *
 from tkinter import ttk
-from tkinter import *
+# from tkinter import *
 import tkinter
 from stats_trees import *
 
@@ -15,7 +15,7 @@ def label_maker(text, frm):
     label.grid_remove()
     return label
 
-def clean_up(frm, button = None):
+def clean_up(frm, button = None, table_button=None):
     children = frm.winfo_children()
     for i in children:
         if isinstance(i, ttk.Button):
@@ -24,20 +24,28 @@ def clean_up(frm, button = None):
             i.destroy()
             if button is not None:
                 button.config(text="SHOW CHART")
+        elif isinstance(i, ttk.Treeview):
+            i.destroy()
         else:
             i.grid_remove()
+
 
 
 def percentage_calculator(total, part):
     return f'{((part / total) * 100):.2f}%'
 
 
-def create_destroy_chart(*func_params, frm, func, button):
+def create_destroy_chart(*func_params, frm, func, button, table_button):
     for child in frm.winfo_children():
         if isinstance(child, tkinter.Canvas):
             child.destroy()
             button.config(text="SHOW CHART")
             return
+    for child in frm.winfo_children():
+        if isinstance(child, tkinter.ttk.Treeview):
+            child.destroy()
+            table_button.config(text="SHOW TABLE")
+
 
     fig = func(*func_params)
     canvas = FigureCanvasTkAgg(fig, master=frm)
@@ -46,15 +54,20 @@ def create_destroy_chart(*func_params, frm, func, button):
     button.config(text="HIDE CHART")
 
 
-def create_destroy_tree(*params, frm, button):
+def create_destroy_tree(*params, frm, button, chart_button):
     for child in frm.winfo_children():
         if isinstance(child, tkinter.ttk.Treeview):
             child.destroy()
-            button.config(text="HIDE TABLE")
+            button.config(text="SHOW TABLE")
             return
+    for child in frm.winfo_children():
+        if isinstance(child, tkinter.Canvas):
+            child.destroy()
+            chart_button.config(text="SHOW CHART")
+
     tree = grow_tree(frm, *params)
     tree.grid(column=4, row=0, padx=2, pady=2, columnspan=3, rowspan=10)
-    button.config(text="SHOW TABLE")
+    button.config(text="HIDE TABLE")
 
 
 def show_statistics(button_id, context):
@@ -64,8 +77,12 @@ def show_statistics(button_id, context):
     if button_id == 'average_per_day_button':
         frm = context['frm']
         chart_button = context['chart_button']
+        table_button = context['table_button']
         clean_up(frm)
         chart_button.grid_remove()
+        chart_button.config(text="SHOW CHART")
+        table_button.grid_remove()
+        table_button.config(text="SHOW TABLE")
 
         average_apps_per_day_label = label_maker("Average Apps per Day:", frm)
         average_apps_per_day_label.grid(column=0, row=5, padx=2, pady=2)
@@ -77,6 +94,7 @@ def show_statistics(button_id, context):
     elif button_id == 'jobs_per_status_button':
         frm = context['frm']
         chart_button = context['chart_button']
+        table_button = context['table_button']
 
         clean_up(frm, chart_button)
 
@@ -89,23 +107,21 @@ def show_statistics(button_id, context):
             label_maker(f'{cat}:\n\tAmount: {per_status}\n\tPercent: {percentage_calculator(total_rows, per_status)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
             row_num += index
 
-        print(type(jobs), type(category))
-        print(category)
-        print(jobs)
-
-        tree = grow_tree(frm, category, jobs)
-        tree.grid(row=0, column=5, rowspan=10, padx=2, pady=2)
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
         chart_button.config(
-            command=lambda: create_destroy_chart(jobs, category, 'status', frm=frm, func=apps_per_cat_chart, button=chart_button,))
+            command=lambda: create_destroy_chart(jobs, category, 'status', frm=frm, func=apps_per_cat_chart, button=chart_button, table_button=table_button))
+
+        table_button.grid(column=0, row=7, padx=2, pady=2)
+        table_button.config(command=lambda c=category, j=jobs: create_destroy_tree(c, j, frm=frm, button=table_button, chart_button=chart_button))
         return None
 
     elif button_id == 'jobs_per_type_button':
         frm = context['frm']
         chart_button = context['chart_button']
+        table_button = context['table_button']
 
-        clean_up(frm, chart_button)
+        clean_up(frm, chart_button, table_button)
 
         jobs_per_type_label = label_maker("Jobs per Type:", frm)
         jobs_per_type_label.grid(column=0, row=5, padx=2, pady=2)
@@ -116,15 +132,22 @@ def show_statistics(button_id, context):
             label_maker(f'{cat}:\n\tAmount: {per_type}\n\tPercent: {percentage_calculator(total_rows, per_type)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
             row_num += index
 
+
         chart_button.grid(column=0, row=6, padx=2, pady=2)
         chart_button.config(
-            command=lambda: create_destroy_chart(jobs, category, 'type', frm=frm, func=apps_per_cat_chart, button=chart_button,))
+            command=lambda: create_destroy_chart(jobs, category, 'type', frm=frm, func=apps_per_cat_chart, button=chart_button, table_button=table_button))
 
+        table_button.grid(column=0, row=7, padx=2, pady=2)
+        table_button.config(command=lambda c=category, j=jobs: create_destroy_tree(c, j, frm=frm, button=table_button,chart_button=chart_button))
         return None
 
     elif button_id == 'jobs_per_date_button':
         frm = context['frm']
         chart_button = context['chart_button']
+        table_button = context['table_button']
+
+        chart_button.config(text="SHOW CHART")
+        table_button.config(text="SHOW TABLE")
 
         clean_up(frm, chart_button)
 
@@ -139,14 +162,19 @@ def show_statistics(button_id, context):
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
         chart_button.config(
-            command=lambda: create_destroy_chart(jobs, category, 'date', frm=frm, func=apps_per_cat_chart, button=chart_button))
+            command=lambda: create_destroy_chart(jobs, category, 'date', frm=frm, func=apps_per_cat_chart, button=chart_button, table_button=table_button))
 
+        table_button.grid(column=0, row=7, padx=2, pady=2)
+        table_button.config(command=lambda c=category, j=jobs: create_destroy_tree(c, j, frm=frm, button=table_button,chart_button=chart_button))
         return None
 
 
     elif button_id == 'apps_sent_last_week_button':
         frm = context['frm']
         chart_button = context['chart_button']
+        table_button = context['table_button']
+        table_button.grid_remove()
+        table_button.config(text='SHOW TABLE')
 
         clean_up(frm, chart_button)
 
@@ -159,7 +187,7 @@ def show_statistics(button_id, context):
         data = stats.apps_per_day_last_week()
         chart_button.grid(column=0, row=6, padx=2, pady=2)
 
-        chart_button.config(command=lambda: create_destroy_chart(data, frm=frm, func=apps_per_day_last_week_chart, button=chart_button))
+        chart_button.config(command=lambda: create_destroy_chart(data, frm=frm, func=apps_per_day_last_week_chart, button=chart_button, table_button=table_button))
 
         return None
 

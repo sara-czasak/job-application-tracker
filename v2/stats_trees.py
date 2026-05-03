@@ -4,7 +4,7 @@ from tkinter import ttk
 
 
 def grow_tree(frm, categories, data):
-    tree = ttk.Treeview(frm, columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied', 'job_status'], show='tree headings')
+    tree = ttk.Treeview(frm, columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied', 'job_status'], show='tree headings', height=10)
     tree.heading('job_name', text='Job Name')
     tree.column('job_name', width=100)
     tree.heading('job_type', text='Job Type')
@@ -18,7 +18,6 @@ def grow_tree(frm, categories, data):
     tree.heading('job_status', text='Job Status')
     tree.column('job_status', width=100)
     for cat in categories:
-        print(type(data), type(cat), data[cat])
         parent_id = tree.insert('', 'end', text=cat)
         for _, row in data[cat].iterrows():
             tree.insert(parent_id, 'end', values=list(row.values))

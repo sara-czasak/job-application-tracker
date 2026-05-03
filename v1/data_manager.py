@@ -65,11 +65,11 @@ class DataManager:
         else:
             return False
 
-
     # Check if data exists
     def check_if_data(self, job):
         # Check if fields exist
-        if job['job_name'].get() != '' and job['job_type'].get() != '' and job['job_address'].get() != '' and job['date'].get() != '' and job['job_status'].get() != '':
+        if job['job_name'].get() != '' and job['job_type'].get() != '' and job['job_address'].get() != '' and job[
+            'date'].get() != '' and job['job_status'].get() != '':
             # Format data
             data_dict = {
                 'job_name': job['job_name'].get(),
@@ -79,11 +79,14 @@ class DataManager:
                 'date': job['date'].get(),
                 'job_status': job['job_status'].get()
             }
-            print(data_dict)
-            # Ask user if entered information is correct
-            if check_if_info_correct(data_dict):
-                return True
+            if self.check_if_date(data_dict['date']):
+                # Ask user if entered information is correct
+                if check_if_info_correct(data_dict):
+                    return True
+                else:
+                    return False
             else:
+                feedback('Please enter date in DD-MM-YYYY format.')
                 return False
         else:
             # Inform user that they need to fill out all but one field
