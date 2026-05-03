@@ -1,6 +1,4 @@
-import tkinter as tk
 from popups import *
-# from stats_ui import *
 
 
 # Change layout to home screen
@@ -35,7 +33,6 @@ def adding_entry_and_cleanup(data_dict, data_manager):
 
 # Handle entry deletion
 def delete_job(tree, data_manager):
-    data = data_manager.load_data()
     item_to_delete = tree.focus()
     index = int(tree.index(item_to_delete))
     # Check if an item was selected
@@ -60,7 +57,6 @@ def delete_job(tree, data_manager):
 
 # Handle updating data frame
 def save_changes_func(context, index):
-    update_button = context['update_button']
     job_name = context['job_name']
     job_type = context['job_type']
     transport = context['transport']
@@ -68,19 +64,9 @@ def save_changes_func(context, index):
     date = context['date']
     job_status = context['job_status']
     data_manager = context['data_manager']
-    job_name_label = context['job_name_label']
-    job_type_label = context['job_type_label']
-    transport_label = context['transport_label']
-    job_address_label = context['job_address_label']
-    date_label = context['date_label']
-    job_status_label = context['job_status_label']
-    edit_button = context['edit_button']
     search_button = context['search_button']
     add_button = context['add_button']
     view_all_button = context['view_all_button']
-    delete_button = context['delete_button']
-    back_to_menu_button = context['back_to_menu_button']
-    frm = context['frm']
 
     data_dict = {
         'job_name': job_name,

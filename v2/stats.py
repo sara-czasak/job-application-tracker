@@ -40,7 +40,24 @@ class Statistics(DataManager):
         return total_apps
 
 
+    def apps_per_day_last_week(self):
+        now = dt.datetime.now()
+        dates = [(now - dt.timedelta(x)).strftime("%d-%m-%Y") for x in range(7)]
+        data_dict = {}
+        for date in dates[::-1]:
+            try:
+                count = len(self.find_data(date))
+                date = date.split('-')
+                date = date[0] + '/' + date[1]
+                data_dict[date] = count
+            except KeyError:
+                count = 0
+                data_dict[date] = count
+        return data_dict
+
+
+
 if __name__ == '__main__':
     statistics = Statistics()
-    statistics.apps_in_last_week()
+    print(statistics.apps_per_day_last_week())
 

@@ -1,8 +1,3 @@
-from tkinter import *
-from tkinter import ttk
-
-
-from data_manager import *
 from button_func import *
 from stats_ui import *
 
@@ -138,9 +133,6 @@ back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
 back_to_menu_button.grid_remove()
 
 
-
-
-
 # VIEW ALL JOBS UI -> treeview
 tree = ttk.Treeview(frm, columns=['job_name', 'job_type', 'public_transport', 'job_address', 'date_applied',
                                           'job_status'], show='headings')
@@ -236,7 +228,6 @@ view_stats_button.grid(column=3, row=2, padx=2, pady=2)
 
 
 # Widgets for view stats
-
 
 
 average_per_day_button = ttk.Button(frm, text='AVERAGE APPS PER DAY', command=lambda: show_statistics('average_per_day_button',{
