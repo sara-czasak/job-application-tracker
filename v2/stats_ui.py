@@ -3,6 +3,8 @@ from visualization_brain import *
 from tkinter import ttk
 from tkinter import *
 import tkinter
+from stats_trees import *
+
 
 stats = Statistics()
 

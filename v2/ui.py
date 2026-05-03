@@ -230,8 +230,6 @@ view_stats_button.grid(column=3, row=2, padx=2, pady=2)
 
 
 # Widgets for view stats
-
-
 average_per_day_button = ttk.Button(frm, text='AVERAGE APPS PER DAY', command=lambda: show_statistics('average_per_day_button',{
     'frm': frm,
     'chart_button': chart_button,

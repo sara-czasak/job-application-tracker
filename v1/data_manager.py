@@ -1,6 +1,7 @@
 import pandas as pd
 import tkinter as tk
 from popups import *
+from datetime import datetime
 
 
 class DataManager:
@@ -30,6 +31,7 @@ class DataManager:
                 'date_applied': new_job_data['date'].get(),
                 'job_status': new_job_data['job_status'].get()
             }])
+
             self.data = pd.concat([self.data, new_job], ignore_index=True)
             # Save updated data
             self.data.to_csv('job_data.csv', index=False)
@@ -115,3 +117,14 @@ class DataManager:
         self.data = self.data.reset_index(drop=True)
         self.data.to_csv('job_data.csv', index=False)
         return self.data
+
+
+    def check_if_date(self, date):
+        date_format = "%d-%m-%Y"
+        try:
+            res = bool(datetime.strptime(date, date_format))
+            return res
+        except ValueError:
+            res = False
+            return res
+
