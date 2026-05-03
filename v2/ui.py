@@ -149,7 +149,7 @@ tree.column('job_address', width=100)
 tree.heading('date_applied', text='Date Applied')
 tree.column('date_applied', width=100)
 tree.heading('job_status', text='Job Status')
-tree.column('job_status', width=150)
+tree.column('job_status', width=100)
 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
 tree.grid_remove()
 

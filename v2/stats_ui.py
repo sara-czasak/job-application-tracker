@@ -22,7 +22,8 @@ def clean_up(frm, button = None):
             pass
         elif isinstance(i, tkinter.Canvas):
             i.destroy()
-            button.config(text="SHOW CHART")
+            if button is not None:
+                button.config(text="SHOW CHART")
         else:
             i.grid_remove()
 
@@ -45,6 +46,17 @@ def create_destroy_chart(*func_params, frm, func, button):
     button.config(text="HIDE CHART")
 
 
+def create_destroy_tree(*params, frm, button):
+    for child in frm.winfo_children():
+        if isinstance(child, tkinter.ttk.Treeview):
+            child.destroy()
+            button.config(text="HIDE TABLE")
+            return
+    tree = grow_tree(frm, *params)
+    tree.grid(column=4, row=0, padx=2, pady=2, columnspan=3, rowspan=10)
+    button.config(text="SHOW TABLE")
+
+
 def show_statistics(button_id, context):
     stats.data = stats.load_data()
     total_rows = len(stats.data)
@@ -53,6 +65,7 @@ def show_statistics(button_id, context):
         frm = context['frm']
         chart_button = context['chart_button']
         clean_up(frm)
+        chart_button.grid_remove()
 
         average_apps_per_day_label = label_maker("Average Apps per Day:", frm)
         average_apps_per_day_label.grid(column=0, row=5, padx=2, pady=2)
@@ -75,6 +88,13 @@ def show_statistics(button_id, context):
             per_status = len(jobs[cat])
             label_maker(f'{cat}:\n\tAmount: {per_status}\n\tPercent: {percentage_calculator(total_rows, per_status)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
             row_num += index
+
+        print(type(jobs), type(category))
+        print(category)
+        print(jobs)
+
+        tree = grow_tree(frm, category, jobs)
+        tree.grid(row=0, column=5, rowspan=10, padx=2, pady=2)
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
         chart_button.config(
