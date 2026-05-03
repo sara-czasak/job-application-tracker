@@ -17,10 +17,10 @@ class Statistics(DataManager):
 
     def jobs_per(self, category):
         unique_category = self.data[category].unique()
-        dict = {}
+        data_dict = {}
         for cat in unique_category:
-            dict[cat] = self.data[self.data[category] == cat]
-        return dict, unique_category
+            data_dict[cat] = self.data[self.data[category] == cat]
+        return data_dict, unique_category
 
 
     def find_data(self, value):
@@ -59,5 +59,9 @@ class Statistics(DataManager):
 
 if __name__ == '__main__':
     statistics = Statistics()
-    print(statistics.apps_per_day_last_week())
+    # print(statistics.apps_per_day_last_week())
+    # dict, cat = statistics.jobs_per('job_type')
+    # print(cat)
+    # for i in dict.values():
+    #     print(len(i))
 
