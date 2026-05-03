@@ -1,7 +1,7 @@
 from button_func import *
 from stats_ui import *
-from tkinter import *
 from tkinter import ttk
+from tkinter import *
 
 
 # Load in pandas data frame

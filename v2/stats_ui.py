@@ -1,6 +1,8 @@
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from visualization_brain import *
-
+from tkinter import ttk
+from tkinter import *
+import tkinter
 
 stats = Statistics()
 

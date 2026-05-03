@@ -1,7 +1,4 @@
-import tkinter
-from tkinter import ttk
 import matplotlib.pyplot as plt
-import numpy as np
 from stats import *
 
 
