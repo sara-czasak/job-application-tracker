@@ -5,41 +5,36 @@ import numpy as np
 from stats import *
 
 
-plt.figure(figsize=(4,4))
-
-def apps_per_day_last_week_chart(data_dict):
 
 
-    dates = data_dict.keys()
-    apps = data_dict.values()
-
-    plt.plot(dates, apps, marker='o')
-    plt.title('Job applications sent out last week')
-    plt.xlabel('Date')
-    plt.ylabel('Job applications')
-    plt.show()
+def apps_per_day_last_week_chart(data):
 
 
-def apps_per_cat(data, cats, jobs_per):
+    dates = data.keys()
+    apps = data.values()
+
+    fig, ax = plt.subplots(figsize=(4,4))
+
+    ax.plot(dates, apps, marker='o')
+    ax.set_title('Job applications sent out last week')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Job applications')
+    return fig
+
+
+def apps_per_cat_chart(data, cats, jobs_per):
     cats = cats.tolist()
     apps = []
     for i in data.values():
         apps.append(len(i))
 
-    plt.bar(cats, apps)
-    plt.title(f'Jobs per {jobs_per}')
-    plt.xlabel('Categories')
-    plt.ylabel('Job count')
-    plt.show()
+    fig, ax = plt.subplots(figsize=(4, 4))
 
-
-
-
-
-
-
-
-
+    ax.bar(cats, apps)
+    ax.set_title(f'Jobs per {jobs_per}')
+    ax.set_xlabel('Categories')
+    ax.set_ylabel('Job count')
+    return fig
 
 
 
