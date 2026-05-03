@@ -232,6 +232,7 @@ view_stats_button.grid(column=3, row=2, padx=2, pady=2)
 
 average_per_day_button = ttk.Button(frm, text='AVERAGE APPS PER DAY', command=lambda: show_statistics('average_per_day_button',{
     'frm': frm,
+    'chart_button': chart_button,
 }))
 average_per_day_button.grid(column=1, row=2, padx=2, pady=2)
 average_per_day_button.grid_remove()
@@ -239,6 +240,7 @@ average_per_day_button.grid_remove()
 
 jobs_per_status_button = ttk.Button(frm, text='JOBS PER STATUS', command=lambda: show_statistics('jobs_per_status_button',{
     'frm': frm,
+    'chart_button': chart_button,
 }))
 jobs_per_status_button.grid(column=1, row=3, padx=2, pady=2)
 jobs_per_status_button.grid_remove()
@@ -246,6 +248,7 @@ jobs_per_status_button.grid_remove()
 
 jobs_per_type_button = ttk.Button(frm, text='JOBS PER TYPE', command=lambda: show_statistics('jobs_per_type_button',{
     'frm': frm,
+    'chart_button': chart_button,
 }))
 jobs_per_type_button.grid(column=1, row=3, padx=2, pady=2)
 jobs_per_type_button.grid_remove()
@@ -253,6 +256,7 @@ jobs_per_type_button.grid_remove()
 
 jobs_per_date_button = ttk.Button(frm, text='JOBS PER DATE', command=lambda: show_statistics('jobs_per_date_button',{
     'frm': frm,
+    'chart_button': chart_button,
 }))
 jobs_per_date_button.grid(column=1, row=3, padx=2, pady=2)
 jobs_per_date_button.grid_remove()
@@ -260,10 +264,16 @@ jobs_per_date_button.grid_remove()
 
 apps_sent_last_week_button = ttk.Button(frm, text='APPLICATIONS IN PAST WEEK', command=lambda: show_statistics('apps_sent_last_week_button',{
     'frm': frm,
+    'chart_button': chart_button,
 }))
 apps_sent_last_week_button.grid(column=1, row=3, padx=2, pady=2)
 apps_sent_last_week_button.grid_remove()
 
+
+# Chart button
+chart_button = ttk.Button(frm, text='SHOW CHART')
+chart_button.grid(column=1, row=4, padx=2, pady=2)
+chart_button.grid_remove()
 
 
 root.mainloop()
