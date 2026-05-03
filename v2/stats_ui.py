@@ -13,14 +13,14 @@ def label_maker(text, frm):
     label.grid_remove()
     return label
 
-def clean_up(frm):
+def clean_up(frm, button = None):
     children = frm.winfo_children()
     for i in children:
         if isinstance(i, ttk.Button):
             pass
-        elif isinstance(i, FigureCanvasTkAgg):
-            plt.close(i.figure)
-            i.get_tk_widget().destroy()
+        elif isinstance(i, tkinter.Canvas):
+            i.destroy()
+            button.config(text="SHOW CHART")
         else:
             i.grid_remove()
 
@@ -29,7 +29,7 @@ def percentage_calculator(total, part):
     return f'{((part / total) * 100):.2f}%'
 
 
-def create_destroy_chart(*func_params, frm, func, button, row):
+def create_destroy_chart(*func_params, frm, func, button):
     for child in frm.winfo_children():
         if isinstance(child, tkinter.Canvas):
             child.destroy()
@@ -39,7 +39,7 @@ def create_destroy_chart(*func_params, frm, func, button, row):
     fig = func(*func_params)
     canvas = FigureCanvasTkAgg(fig, master=frm)
     canvas.draw()
-    canvas.get_tk_widget().grid(column=0, row=row, padx=2, pady=2, columnspan=3)
+    canvas.get_tk_widget().grid(column=4, row=0, padx=2, pady=2, columnspan=3, rowspan=10)
     button.config(text="HIDE CHART")
 
 
@@ -49,6 +49,7 @@ def show_statistics(button_id, context):
 
     if button_id == 'average_per_day_button':
         frm = context['frm']
+        chart_button = context['chart_button']
         clean_up(frm)
 
         average_apps_per_day_label = label_maker("Average Apps per Day:", frm)
@@ -62,7 +63,7 @@ def show_statistics(button_id, context):
         frm = context['frm']
         chart_button = context['chart_button']
 
-        clean_up(frm)
+        clean_up(frm, chart_button)
 
         jobs_per_status_label = label_maker("Jobs per Status:", frm)
         jobs_per_status_label.grid(column=0, row=5, padx=2, pady=2)
@@ -75,16 +76,14 @@ def show_statistics(button_id, context):
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
         chart_button.config(
-            command=lambda: create_destroy_chart(jobs, category, 'status', frm=frm, func=apps_per_cat_chart,
-                                                 button=chart_button,
-                                                 row=row_num + 1))
+            command=lambda: create_destroy_chart(jobs, category, 'status', frm=frm, func=apps_per_cat_chart, button=chart_button,))
         return None
 
     elif button_id == 'jobs_per_type_button':
         frm = context['frm']
         chart_button = context['chart_button']
 
-        clean_up(frm)
+        clean_up(frm, chart_button)
 
         jobs_per_type_label = label_maker("Jobs per Type:", frm)
         jobs_per_type_label.grid(column=0, row=5, padx=2, pady=2)
@@ -97,9 +96,7 @@ def show_statistics(button_id, context):
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
         chart_button.config(
-            command=lambda: create_destroy_chart(jobs, category, 'type', frm=frm, func=apps_per_cat_chart,
-                                                 button=chart_button,
-                                                 row=row_num + 1))
+            command=lambda: create_destroy_chart(jobs, category, 'type', frm=frm, func=apps_per_cat_chart, button=chart_button,))
 
         return None
 
@@ -107,7 +104,7 @@ def show_statistics(button_id, context):
         frm = context['frm']
         chart_button = context['chart_button']
 
-        clean_up(frm)
+        clean_up(frm, chart_button)
 
         jobs_per_type_label = label_maker("Jobs per Date:", frm)
         jobs_per_type_label.grid(column=0, row=5, padx=2, pady=2)
@@ -120,8 +117,7 @@ def show_statistics(button_id, context):
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
         chart_button.config(
-            command=lambda: create_destroy_chart(jobs, category, 'date', frm=frm, func=apps_per_cat_chart, button=chart_button,
-                                                 row=row_num+1))
+            command=lambda: create_destroy_chart(jobs, category, 'date', frm=frm, func=apps_per_cat_chart, button=chart_button))
 
         return None
 
@@ -130,7 +126,7 @@ def show_statistics(button_id, context):
         frm = context['frm']
         chart_button = context['chart_button']
 
-        clean_up(frm)
+        clean_up(frm, chart_button)
 
         week = stats.apps_in_last_week()
         apps_last_week_label = label_maker("Apps sent out last week:", frm)
@@ -141,7 +137,7 @@ def show_statistics(button_id, context):
         data = stats.apps_per_day_last_week()
         chart_button.grid(column=0, row=6, padx=2, pady=2)
 
-        chart_button.config(command=lambda: create_destroy_chart(data, frm=frm, func=apps_per_day_last_week_chart, button=chart_button, row=7))
+        chart_button.config(command=lambda: create_destroy_chart(data, frm=frm, func=apps_per_day_last_week_chart, button=chart_button))
 
         return None
 
