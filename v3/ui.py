@@ -213,6 +213,8 @@ search_by_options = OptionMenu(frm, opt, *search_by)
 search_by_options.grid(column=1, row=3, padx=2, pady=2)
 search_by_options.grid_remove()
 
+search_by_options.configure(font=('Verdana', 10))
+
 
 # WORKING ON THIS:
 # View statistics button
@@ -289,7 +291,10 @@ table_button = ttk.Button(frm, text='SHOW TABLE')
 chart_button.grid(column=1, row=4, padx=2, pady=2)
 chart_button.grid_remove()
 
+children = frm.winfo_children()
+for i in children:
+    print(i.winfo_class())
 
-style.style_buttons()
+style.my_theme()
 
 root.mainloop()

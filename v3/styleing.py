@@ -5,17 +5,18 @@ from tkinter import ttk, font
 class StyleWidgets:
     def __init__(self, frm):
         self.frm = frm
-        self.style_buttons()
+        self.my_theme()
 
 
-    def style_buttons(self):
+    def my_theme(self):
         style = ttk.Style()
         style.configure('TButton', font=('Verdana', 10))
         style.map('TButton', foreground=[('pressed', 'blue'), ('!pressed', 'black')],
                   background=[('pressed', 'blue'), ('!pressed', 'white')])
+        style.configure('TLabel', font=('Verdana', 10))
+        style.configure('TEntry', font=('Verdana', 10))
+        style.configure('Treeview', font=('Verdana', 8))
 
-        children = self.frm.winfo_children()
-        for i in children:
-            if isinstance(i, ttk.Button):
-                pass
+
+
 
