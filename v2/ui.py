@@ -151,6 +151,7 @@ tree.column('date_applied', width=100)
 tree.heading('job_status', text='Job Status')
 tree.column('job_status', width=100)
 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
+tree._is_main_tree = True
 tree.grid_remove()
 
 

@@ -25,7 +25,8 @@ def clean_up(frm, button = None, table_button=None):
             if button is not None:
                 button.config(text="SHOW CHART")
         elif isinstance(i, ttk.Treeview):
-            i.destroy()
+            if not getattr(i, '_is_main_tree', False):
+                i.destroy()
         else:
             i.grid_remove()
 
@@ -43,8 +44,9 @@ def create_destroy_chart(*func_params, frm, func, button, table_button):
             return
     for child in frm.winfo_children():
         if isinstance(child, tkinter.ttk.Treeview):
-            child.destroy()
-            table_button.config(text="SHOW TABLE")
+            if not getattr(child, '_is_main_tree', False):
+                child.destroy()
+                table_button.config(text="SHOW TABLE")
 
 
     fig = func(*func_params)
@@ -57,9 +59,10 @@ def create_destroy_chart(*func_params, frm, func, button, table_button):
 def create_destroy_tree(*params, frm, button, chart_button):
     for child in frm.winfo_children():
         if isinstance(child, tkinter.ttk.Treeview):
-            child.destroy()
-            button.config(text="SHOW TABLE")
-            return
+            if not getattr(child, '_is_main_tree', False):
+                child.destroy()
+                button.config(text="SHOW TABLE")
+                return
     for child in frm.winfo_children():
         if isinstance(child, tkinter.Canvas):
             child.destroy()
