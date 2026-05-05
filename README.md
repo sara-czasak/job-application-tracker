@@ -142,3 +142,9 @@ job-application-tracker/
 Found a bug? Have a feature request? Open an issue on GitHub or reach out.
 
 Happy job hunting! 🎯
+
+---
+
+**If this helped you, consider supporting the project:**
+
+☕ [Buy me a coffee](https://ko-fi.com/sara_czasak)
