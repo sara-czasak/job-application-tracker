@@ -32,6 +32,8 @@ def language_menu(root):
     root.withdraw()
     window = tk.Toplevel()
     window.title("CHOOSE LANGUAGE")
+    label = tk.Label(window, text="SELECT LANGUAGE")
+    label.pack(padx=5, pady=5)
 
     language_choice = {'lang': None}
 
@@ -41,11 +43,11 @@ def language_menu(root):
         root.deiconify()
 
     ang = ttk.Button(window, text='ANG', command=lambda: wait_for_choice('ANG'))
-    ang.pack()
+    ang.pack(padx=5, pady=5)
     es = ttk.Button(window, text='ES', command=lambda: wait_for_choice('ES'))
-    es.pack()
+    es.pack(padx=5, pady=5)
     pl = ttk.Button(window, text='PL', command=lambda: wait_for_choice('PL'))
-    pl.pack()
+    pl.pack(padx=5, pady=5)
 
     window.wait_window()
     return language_choice['lang']

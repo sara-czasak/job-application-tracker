@@ -21,11 +21,11 @@ frm.grid()
 
 style = StyleWidgets(frm)
 
-lang_center = LanguageCenter()
-lang_center.set_language()
 
 lang = language_menu(root)
-print(lang)
+
+lang_center = LanguageCenter(lang)
+lang_center.set_language()
 
 # Handle showing data in treeview
 view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all',{
