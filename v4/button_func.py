@@ -1,3 +1,5 @@
+from tkinter import ttk
+
 from popups import *
 
 
@@ -7,6 +9,7 @@ def back_to_menu(frm, view_all_button, add_button, search_button, view_stats_but
 
     for i in children:
         i.grid_remove()
+
     view_all_button.grid(column=0, row=2, padx=2, pady=2)
     add_button.grid(column=1, row=2, padx=2, pady=2)
     search_button.grid(column=2, row=2, padx=2, pady=2)

@@ -15,6 +15,7 @@ data = data_manager.data
 root = Tk()
 root.minsize(250,70)
 root.title("JOB HUNT HELPER")
+
 frm = ttk.Frame(root, padding=10)
 frm.grid()
 
@@ -22,6 +23,9 @@ style = StyleWidgets(frm)
 
 lang_center = LanguageCenter()
 lang_center.set_language()
+
+lang = language_menu(root)
+print(lang)
 
 # Handle showing data in treeview
 view_all_button = ttk.Button(frm, text="VIEW ALL", command=lambda: layout_hide_show('view_all',{
@@ -218,6 +222,13 @@ search_by_options.grid(column=1, row=3, padx=2, pady=2)
 search_by_options.grid_remove()
 
 search_by_options.configure(font=('Verdana', 10))
+
+
+# languages = ['EN', 'ES', 'PL']
+# initial_text = StringVar(value="CHOOSE LANGUAGE")
+# language_choice = OptionMenu(frm, initial_text, *languages)
+# language_choice.grid(column=4, row=0, padx=2, pady=2)
+# language_choice._is_lang_menu = True
 
 
 # WORKING ON THIS:

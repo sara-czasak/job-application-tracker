@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-
+import tkinter.ttk as ttk
 
 # Handle user error feedback
 def feedback(message):
@@ -28,8 +28,24 @@ def are_you_sure():
         return False
 
 
-# def choose_language():
-#     language = tk.messagebox.askquestion(
-#         title="Choose language", options='English, Spanish, Polish'
-#     )
-#     return language
+def language_menu(root):
+    root.withdraw()
+    window = tk.Toplevel()
+    window.title("CHOOSE LANGUAGE")
+
+    language_choice = {'lang': None}
+
+    def wait_for_choice(lang):
+        language_choice['lang'] = lang
+        window.destroy()
+        root.deiconify()
+
+    ang = ttk.Button(window, text='ANG', command=lambda: wait_for_choice('ANG'))
+    ang.pack()
+    es = ttk.Button(window, text='ES', command=lambda: wait_for_choice('ES'))
+    es.pack()
+    pl = ttk.Button(window, text='PL', command=lambda: wait_for_choice('PL'))
+    pl.pack()
+
+    window.wait_window()
+    return language_choice['lang']
