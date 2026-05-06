@@ -1,5 +1,6 @@
 languages = {
             'ANG': {
+                'Percent: ': 'Percent: ',
                 "JOB HUNT HELPER": "JOB HUNT HELPER",
                 'VIEW ALL': 'VIEW ALL',
                 'ADD': 'ADD',
@@ -70,6 +71,8 @@ languages = {
                 'Jobs per ': 'Jobs per ',
                 'Categories': 'Categories',
                 'Job count': 'Job count',
+                'Settings': 'Settings',
+                'Amount: ': 'Amount: '
             },
             'PL': {
                 "JOB HUNT HELPER": "ASYSTENT POSZUKIWANIA PRACY",
@@ -142,6 +145,7 @@ languages = {
                 'Jobs per ': 'Prace na ',
                 'Categories': 'Kategorie',
                 'Job count': 'Iloś złożonych CV',
+                'Settings': 'Ustawienia',
             },
             'ES': {
                 "JOB HUNT HELPER": "AYUDANTE EN LA BÚSQUEDA DE EMPLEO",
@@ -192,6 +196,7 @@ languages = {
                 'Amount:': 'Cantidad:',
                 'Percent:': 'Porcentaje:',
                 "Jobs per Status:": "Empleos por status:",
+                'JOBS PER STATUS': "EMPLEOS POR STATUS:",
                 "Jobs per Type:": "Trabajos por tipo:",
                 "Jobs per Date:": "Trabajos por fecha:",
                 "Apps sent out last week:": "solicitudes enviadas la semana pasada:",
@@ -214,5 +219,8 @@ languages = {
                 'Jobs per ': 'Empleos por ',
                 'Categories': 'Categorías',
                 'Job count': 'Solicitudes',
+                'Settings': 'Ajustes',
+                'Amount: ': 'Cantidad:',
+                'Percent: ': 'Porcentaje: ',
             }
         }

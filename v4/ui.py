@@ -6,10 +6,6 @@ from styleing import *
 from language_center import *
 
 
-# # Load in pandas data frame
-# data_manager = DataManager()
-# data = data_manager.data
-
 # Set up window and frame
 root = Tk()
 root.minsize(250,70)
@@ -28,6 +24,17 @@ lang_center.set_language()
 # Load in pandas data frame
 data_manager = DataManager(lang_center)
 data = data_manager.data
+
+
+def go_to_settings():
+    root.withdraw()
+    new_lang = language_menu(root)
+    lang_center.change_language(new_lang)
+
+
+settings_button = ttk.Button(frm, text=lang_center.translate("Settings"), command=go_to_settings)
+settings_button.grid(row=0, column=0, padx=10, pady=10)
+
 
 # Handle showing data in treeview
 view_all_button = ttk.Button(frm, text=lang_center.translate("VIEW ALL"), command=lambda: layout_hide_show('view_all',{

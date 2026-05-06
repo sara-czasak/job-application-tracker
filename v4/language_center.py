@@ -19,3 +19,7 @@ class LanguageCenter:
             return translated_text
         else:
             return None
+
+
+    def change_language(self, lang):
+        self.lang = lang
