@@ -3,7 +3,7 @@ from popups import *
 
 
 # Change layout to home screen
-def back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button, lang_center,):
+def back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button, lang_center, settings_button):
     children = frm.winfo_children()
 
     for i in children:
@@ -13,6 +13,7 @@ def back_to_menu(frm, view_all_button, add_button, search_button, view_stats_but
     add_button.grid(column=1, row=2, padx=2, pady=2)
     search_button.grid(column=2, row=2, padx=2, pady=2)
     view_stats_button.grid(column=3, row=2, padx=2, pady=2)
+    settings_button.grid(row=0, column=0, padx=10, pady=10)
 
 
 # Handle clearing ui widgets
