@@ -5,8 +5,9 @@ from datetime import datetime
 
 
 class DataManager:
-    def __init__(self, lang):
+    def __init__(self, lang_center):
         self.data = self.load_data()
+        self.lang_center = lang_center
 
 
     # Load in data frame
@@ -85,11 +86,11 @@ class DataManager:
                 else:
                     return False
             else:
-                feedback('Please enter date in DD-MM-YYYY format.')
+                feedback(self.lang_center.translate('Please enter date in DD-MM-YYYY format.'))
                 return False
         else:
             # Inform user that they need to fill out all but one field
-            feedback('Only Tram/Bus stop field can be left empty.')
+            feedback(self.lang_center.translate('Only Tram/Bus stop field can be left empty.'))
             return False
 
 

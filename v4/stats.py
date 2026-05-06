@@ -3,8 +3,8 @@ import datetime as dt
 
 
 class Statistics(DataManager):
-    def __init__(self):
-        super(Statistics, self).__init__()
+    def __init__(self, lang_center):
+        super(Statistics, self).__init__(lang_center)
         self.data = self.load_data()
 
 

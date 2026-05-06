@@ -6,7 +6,7 @@ class LanguageCenter:
     def __init__(self, lang):
         self.lang = lang
         self.dictionary = {
-            'ENG': {
+            'ANG': {
                 "JOB HUNT HELPER": "JOB HUNT HELPER",
                 'VIEW ALL': 'VIEW ALL',
                 'ADD': 'ADD',
@@ -124,8 +124,8 @@ class LanguageCenter:
                 "HIDE CHART": "SCHOWAJ WYKRES",
                 "HIDE TABLE": "SCHOWAJ TABELE",
                 "Average Apps per Day:": "Średnia CD/DZIEŃ:",
-                'Amount:': 'Ilość:',
-                'Percent:': 'Procent:',
+                'Amount: ': 'Ilość:',
+                'Percent: ': 'Procent:',
                 "Jobs per Status:": "Prace podzielone na status:",
                 "Jobs per Type:": "Prace podzielone na rodzaj:",
                 "Jobs per Date:": "Prace podzielone na date złorzenia CV:",

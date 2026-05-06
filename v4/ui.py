@@ -6,10 +6,9 @@ from styleing import *
 from language_center import *
 
 
-
-# Load in pandas data frame
-data_manager = DataManager()
-data = data_manager.data
+# # Load in pandas data frame
+# data_manager = DataManager()
+# data = data_manager.data
 
 # Set up window and frame
 root = Tk()
@@ -21,11 +20,14 @@ frm.grid()
 
 style = StyleWidgets(frm)
 
-
 lang = language_menu(root)
 
 lang_center = LanguageCenter(lang)
 lang_center.set_language()
+
+# Load in pandas data frame
+data_manager = DataManager(lang_center)
+data = data_manager.data
 
 # Handle showing data in treeview
 view_all_button = ttk.Button(frm, text=lang_center.translate("VIEW ALL"), command=lambda: layout_hide_show('view_all',{
@@ -131,7 +133,7 @@ edit_button.grid(column=1, row=2, padx=2, pady=2)
 edit_button.grid_remove()
 
 # Handle finding row/s in data frame
-find_button = ttk.Button(frm, text="FIND")
+find_button = ttk.Button(frm, text=(lang_center.translate("FIND")))
 find_button.grid(column=2, row=2, padx=2, pady=2)
 find_button.grid_remove()
 
