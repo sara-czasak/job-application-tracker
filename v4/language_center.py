@@ -232,6 +232,7 @@ class LanguageCenter:
     def translate(self, text):
         if self.lang:
             translated_text = self.dictionary[self.lang][text]
+            print(translated_text)
             return translated_text
         else:
             return None

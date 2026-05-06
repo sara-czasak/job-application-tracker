@@ -5,8 +5,9 @@ from datetime import datetime
 
 
 class DataManager:
-    def __init__(self):
+    def __init__(self, lang):
         self.data = self.load_data()
+
 
     # Load in data frame
     def load_data(self):

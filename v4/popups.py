@@ -44,8 +44,8 @@ def language_menu(root):
 
     ang = ttk.Button(window, text='ANG', command=lambda: wait_for_choice('ANG'))
     ang.pack(padx=5, pady=5)
-    es = ttk.Button(window, text='ES', command=lambda: wait_for_choice('ES'))
-    es.pack(padx=5, pady=5)
+    # es = ttk.Button(window, text='ES', command=lambda: wait_for_choice('ES'))
+    # es.pack(padx=5, pady=5)
     pl = ttk.Button(window, text='PL', command=lambda: wait_for_choice('PL'))
     pl.pack(padx=5, pady=5)
 

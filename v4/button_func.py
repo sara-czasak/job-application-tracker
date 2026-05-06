@@ -1,10 +1,9 @@
 from tkinter import ttk
-
 from popups import *
 
 
 # Change layout to home screen
-def back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button):
+def back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button, lang_center,):
     children = frm.winfo_children()
 
     for i in children:
@@ -35,7 +34,7 @@ def adding_entry_and_cleanup(data_dict, data_manager):
 
 
 # Handle entry deletion
-def delete_job(tree, data_manager):
+def delete_job(tree, data_manager, lang_center):
     item_to_delete = tree.focus()
     index = int(tree.index(item_to_delete))
     # Check if an item was selected
@@ -54,7 +53,7 @@ def delete_job(tree, data_manager):
                 tree.grid(column=0, row=3, columnspan=3, padx=2, pady=2)
     else:
         # Inform user about lack of selection
-        feedback('Please select a job to delete.')
+        feedback(lang_center.translate('Please select a job to delete.'))
     return None
 
 
@@ -103,6 +102,7 @@ def convert_and_search(context):
     back_to_menu_button = context['menu_button']
     edit_button = context['edit_button']
     delete_button = context['delete_button']
+    lang_center = context['lang_center']
 
     col = ''
 
@@ -119,7 +119,7 @@ def convert_and_search(context):
         col = 'job_status'
     else:
         # Inform user that an option needs to be selected
-        feedback('Please select an option from the dropdown menu.')
+        feedback(lang_center.translate('Please select an option from the dropdown menu.'))
 
     if col != '':
         # Search for row/s
@@ -129,7 +129,7 @@ def convert_and_search(context):
         if data is not None:
             if data.empty:
                 # Inform user no entries where found
-                feedback('No entries found.')
+                feedback(lang_center.translate('No entries found.'))
                 return 'No data found'
             else:
                 # Remove unneeded widgets
@@ -144,7 +144,7 @@ def convert_and_search(context):
                 back_to_menu_button.grid(column=0, row=2, padx=2, pady=2)
                 edit_button.grid(column=1, row=2, padx=2, pady=2)
                 delete_button.grid(column=2, row=2, padx=2, pady=2)
-                opt.set("SEARCH BY")
+                opt.set(lang_center.translate("SEARCH BY"))
                 clear_entries([search_bar])
                 return None
         else:
@@ -168,11 +168,12 @@ def layout_hide_show(button_id,context):
         delete_button = context['delete_button']
         back_to_menu_button = context['back_to_menu_button']
         view_stats_button = context['view_stats_button']
+        lang_center = context['lang_center']
         data = data_manager.load_data()
         if not tree.winfo_viewable():
             if data.empty:
                 # Inform user that there is no data
-                feedback('No data found. Please add a job then try again.')
+                feedback(lang_center.translate('No data found. Please add a job then try again.'))
                 return 'No job data added yet'
             else:
                 # Remove unneeded widgets
@@ -214,6 +215,7 @@ def layout_hide_show(button_id,context):
         back_to_menu_button = context['back_to_menu_button']
         view_stats_button = context['view_stats_button']
         frm = context['frm']
+        lang_center = context['lang_center']
 
         # Check if the add ui has been loaded in
         if not job_name_label.winfo_viewable():
@@ -274,6 +276,7 @@ def layout_hide_show(button_id,context):
         delete_button = context['delete_button']
         edit_button = context['edit_button']
         view_stats_button = context['view_stats_button']
+        lang_center = context['lang_center']
 
         # Check if search ui loaded
         if not search_bar.winfo_viewable():
@@ -284,7 +287,7 @@ def layout_hide_show(button_id,context):
             search_by_options.grid(column=2, row=3, padx=2, pady=2)
             back_to_menu_button.grid(column=1, row=2, padx=2, pady=2)
             find_button.grid(column=2, row=2, padx=2, pady=2)
-            opt.set("SEARCH BY")
+            opt.set(lang_center.translate("SEARCH BY"))
             clear_entries([search_bar])
 
             # Search for query value
@@ -302,12 +305,13 @@ def layout_hide_show(button_id,context):
                     'frm': frm,
                     'menu_button': back_to_menu_button,
                     'delete_button': delete_button,
+                    'lang_center': lang_center,
                     }))
             return None
         else:
             # Clear unneeded widgets
             clear_layout([find_button, search_by_options, search_bar])
-            search_button.config(text='SEARCH')
+            search_button.config(text=lang_center.translate('SEARCH'))
             back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button)
             return None
 
@@ -336,6 +340,7 @@ def layout_hide_show(button_id,context):
         back_to_menu_button = context['back_to_menu_button']
         frm = context['frm']
         view_stats_button = context['view_stats_button']
+        lang_center = context['lang_center']
         data = data_manager.load_data()
         selected_item = tree.focus()
         # Get index of item to be updated
@@ -412,7 +417,7 @@ def layout_hide_show(button_id,context):
                 }, index))
             else:
                 # Inform user that nothing was selected
-                feedback('Please select a job to edit.')
+                feedback(lang_center.translate('Please select a job to edit.'))
         else:
             # Clear unneeded widgets
             clear_layout([
@@ -439,9 +444,9 @@ def layout_hide_show(button_id,context):
             date_entry.delete(0, tk.END)
             job_status_entry.delete(0, tk.END)
             back_to_menu(frm, view_all_button, add_button, search_button, delete_button)
-            search_button.config(text='SEARCH')
-            view_all_button.config(text='VIEW ALL')
-            edit_button.config(text='EDIT')
+            search_button.config(text=lang_center.translate('SEARCH'))
+            view_all_button.config(text=lang_center.translate('VIEW ALL'))
+            edit_button.config(text=lang_center.translate('EDIT'))
         return None
 
     elif button_id == 'delete_button':
@@ -467,6 +472,7 @@ def layout_hide_show(button_id,context):
         jobs_per_date_button = context['jobs_per_date_button']
         apps_sent_last_week_button = context['apps_sent_last_week_button']
         frm = context['frm']
+        lang_center = context['lang_center']
 
         clear_layout([add_button, search_button, view_all_button, view_stats_button])
         back_to_menu_button.grid(column=0, row=0, padx=2, pady=2)
