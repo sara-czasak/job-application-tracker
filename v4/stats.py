@@ -56,12 +56,3 @@ class Statistics(DataManager):
         return data_dict
 
 
-
-if __name__ == '__main__':
-    statistics = Statistics()
-    # print(statistics.apps_per_day_last_week())
-    # dict, cat = statistics.jobs_per('job_type')
-    # print(cat)
-    # for i in dict.values():
-    #     print(len(i))
-

@@ -9,7 +9,7 @@ from stats_trees import *
 # stats = Statistics(lang_center)
 
 
-def label_maker(text, frm, lang_center):
+def label_maker(text, frm):
     label = ttk.Label(frm, text=text, anchor='e')
     label.grid(column=1, row=0, padx=2, pady=2)
     label.grid_remove()
@@ -90,10 +90,10 @@ def show_statistics(button_id, context):
         table_button.grid_remove()
         table_button.config(text=lang_center.translate("SHOW TABLE"))
 
-        average_apps_per_day_label = label_maker(lang_center.translate("Average Apps per Day:",), frm, label_maker)
+        average_apps_per_day_label = label_maker(lang_center.translate("Average Apps per Day:",), frm)
         average_apps_per_day_label.grid(column=0, row=5, padx=2, pady=2)
         per_day_average = stats.apps_per_day()
-        average_apps_per_day_stat = label_maker(f'{lang_center.translate("Amount: ")}{per_day_average}\n{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, per_day_average)}', frm, label_maker)
+        average_apps_per_day_stat = label_maker(f'{lang_center.translate("Amount: ")}{per_day_average}\n{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, per_day_average)}', frm)
         average_apps_per_day_stat.grid(column=1, row=5, padx=2, pady=2)
         return None
 
@@ -101,16 +101,16 @@ def show_statistics(button_id, context):
         frm = context['frm']
         chart_button = context['chart_button']
         table_button = context['table_button']
-
+        lang_center = context['lang_center']
         clean_up(frm,lang_center, chart_button)
 
-        jobs_per_status_label = label_maker(lang_center.translate("Jobs per Status:"), frm, label_maker)
+        jobs_per_status_label = label_maker(lang_center.translate("Jobs per Status:"), frm)
         jobs_per_status_label.grid(column=0, row=5, padx=2, pady=2)
         jobs, category = stats.jobs_per('job_status')
         row_num = 7
         for index, cat in enumerate(category):
             per_status = len(jobs[cat])
-            label_maker(f'{cat}:\n\t{lang_center.translate("Amount: ")}{per_status}\n\t{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, per_status)}', frm, label_maker).grid(column=1, row=(index + 6), padx=2, pady=2)
+            label_maker(f'{cat}:\n\t{lang_center.translate("Amount: ")}{per_status}\n\t{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, per_status)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
             row_num += index
 
 
@@ -119,7 +119,7 @@ def show_statistics(button_id, context):
             command=lambda: create_destroy_chart(jobs, category, 'status', frm=frm, func=apps_per_cat_chart, button=chart_button, table_button=table_button, lang_center=lang_center))
 
         table_button.grid(column=0, row=7, padx=2, pady=2)
-        table_button.config(command=lambda c=category, j=jobs: create_destroy_tree(c, j, frm=frm, button=table_button, chart_button=chart_button))
+        table_button.config(command=lambda c=category, j=jobs: create_destroy_tree(c, j, frm=frm, button=table_button, chart_button=chart_button, lang_center=lang_center))
         return None
 
     elif button_id == 'jobs_per_type_button':
@@ -129,13 +129,13 @@ def show_statistics(button_id, context):
 
         clean_up(frm,lang_center, chart_button, table_button)
 
-        jobs_per_type_label = label_maker("Jobs per Type:", frm, label_maker)
+        jobs_per_type_label = label_maker(lang_center.translate("Jobs per Type:"), frm)
         jobs_per_type_label.grid(column=0, row=5, padx=2, pady=2)
         jobs, category = stats.jobs_per('job_type')
         row_num = 6
         for index, cat in enumerate(category):
             per_type = len(jobs[cat])
-            label_maker(f'{cat}:\n\t{lang_center.translate("Amount: ")}{per_type}\n\t{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, per_type)}', frm, label_maker).grid(column=1, row=(index + 6), padx=2, pady=2)
+            label_maker(f'{cat}:\n\t{lang_center.translate("Amount: ")}{per_type}\n\t{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, per_type)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
             row_num += index
 
 
@@ -157,13 +157,13 @@ def show_statistics(button_id, context):
 
         clean_up(frm,lang_center, chart_button)
 
-        jobs_per_type_label = label_maker("Jobs per Date:", frm, label_maker)
+        jobs_per_type_label = label_maker("Jobs per Date:", frm)
         jobs_per_type_label.grid(column=0, row=5, padx=2, pady=2)
         jobs, category = stats.jobs_per('date_applied')
         row_num = 6
         for index, cat in enumerate(category):
             per_date = len(jobs[cat])
-            label_maker(f'{cat}:\n\t{lang_center.translate("Amount: ")}{per_date}\n\t{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, per_date)}', frm, label_maker).grid(column=1, row=(index + 6), padx=2, pady=2)
+            label_maker(f'{cat}:\n\t{lang_center.translate("Amount: ")}{per_date}\n\t{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, per_date)}', frm).grid(column=1, row=(index + 6), padx=2, pady=2)
             row_num += index
 
         chart_button.grid(column=0, row=6, padx=2, pady=2)
@@ -185,9 +185,9 @@ def show_statistics(button_id, context):
         clean_up(frm, lang_center, chart_button)
 
         week = stats.apps_in_last_week()
-        apps_last_week_label = label_maker(lang_center.translate("Apps sent out last week:"), frm, label_maker)
+        apps_last_week_label = label_maker(lang_center.translate("Apps sent out last week:"), frm)
         apps_last_week_label.grid(column=0, row=5, padx=2, pady=2)
-        apps_last_week_stat = label_maker(f'{lang_center.translate("Amount: ")}{week}\n{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, week)}', frm, label_maker)
+        apps_last_week_stat = label_maker(f'{lang_center.translate("Amount: ")}{week}\n{lang_center.translate("Percent: ")}{percentage_calculator(total_rows, week)}', frm)
         apps_last_week_stat.grid(column=1, row=5, padx=2, pady=2)
 
         data = stats.apps_per_day_last_week()

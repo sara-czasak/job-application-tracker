@@ -191,8 +191,6 @@ def layout_hide_show(button_id,context):
                 return None
         else:
             back_to_menu_button.grid(column=0, row=2, padx=2, pady=2)
-
-
             return None
 
     # ADD BUTTON
@@ -258,7 +256,7 @@ def layout_hide_show(button_id,context):
             # Reset values in entries
             clear_entries([job_name_entry, job_type_entry, transport_entry, job_address_entry, date_entry,job_status_entry])
             search_button.grid(column=2, row=2, padx=2, pady=2)
-            back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button)
+            back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button, lang_center, search_button)
             return None
 
     # SEARCH BUTTON
@@ -313,7 +311,7 @@ def layout_hide_show(button_id,context):
             # Clear unneeded widgets
             clear_layout([find_button, search_by_options, search_bar])
             search_button.config(text=lang_center.translate('SEARCH'))
-            back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button)
+            back_to_menu(frm, view_all_button, add_button, search_button, view_stats_button, lang_center, search_button)
             return None
 
     # EDIT BUTTON
@@ -342,6 +340,7 @@ def layout_hide_show(button_id,context):
         frm = context['frm']
         view_stats_button = context['view_stats_button']
         lang_center = context['lang_center']
+        settings_button = context['settings_button']
         data = data_manager.load_data()
         selected_item = tree.focus()
         # Get index of item to be updated
@@ -414,7 +413,8 @@ def layout_hide_show(button_id,context):
                         'search_button': search_button,
                         'delete_button': delete_button,
                         'back_to_menu_button': back_to_menu_button,
-                        'frm' : frm
+                        'frm' : frm,
+                        'settings_button': settings_button,
                 }, index))
             else:
                 # Inform user that nothing was selected
@@ -444,7 +444,7 @@ def layout_hide_show(button_id,context):
             job_address_entry.delete(0, tk.END)
             date_entry.delete(0, tk.END)
             job_status_entry.delete(0, tk.END)
-            back_to_menu(frm, view_all_button, add_button, search_button, delete_button)
+            back_to_menu(frm, view_all_button, add_button, search_button, delete_button, lang_center, settings_button)
             search_button.config(text=lang_center.translate('SEARCH'))
             view_all_button.config(text=lang_center.translate('VIEW ALL'))
             edit_button.config(text=lang_center.translate('EDIT'))
@@ -493,5 +493,3 @@ def layout_hide_show(button_id,context):
 
     else:
         return None
-
-
